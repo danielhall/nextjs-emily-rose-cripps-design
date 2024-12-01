@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography"
 
 export default {
   content: [
@@ -11,8 +12,16 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#5fc0c5"
+      },
+      fontFamily: {
+        primary: ["Josefin Sans", "sans-serif"],
+        secondary: ["Vidaloka", "serif"]
       },
     },
   },
-  plugins: [],
+  plugins: [
+    typography,
+    // ...
+  ],
 } satisfies Config;
