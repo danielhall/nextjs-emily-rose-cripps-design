@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import Project from "../components/project"
 
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
+const POST_QUERY = `*[_type == "post" && slug.current == $params.slug][0]`;
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -18,6 +18,7 @@ const options = { next: { revalidate: 30 } };
 
 export default async function PostPage(params: { 
   params: Promise<{ slug: string }>}) {
+
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
 
   if (!post) {
@@ -28,7 +29,7 @@ export default async function PostPage(params: {
   }
   
   const postImageUrl = post.image
-    ? urlFor(post.image)?.width(700).height(310).url()
+    ? urlFor(post.image)?.width(700).url()
     : null;
 
   return (
@@ -42,9 +43,8 @@ export default async function PostPage(params: {
             <img
               src={postImageUrl}
               alt={post.title}
-              className="aspect-video rounded-xl shadow-md"
+              className="rounded-xl shadow-md"
               width="700"
-              height="310"
             />
           )}
         </div>

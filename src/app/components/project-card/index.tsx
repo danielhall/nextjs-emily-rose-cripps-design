@@ -22,9 +22,9 @@ const ProjectCard = ({ post, index }: { post: SanityDocument, index: number }) =
   return (
     <>
       <motion.div 
-        initial={{ opacity: 0.1 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: index/50 }}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0}}
+        transition={{ delay: index / 50 }}
         key={post._id}>
             <Link href={`${post.slug.current}`}>
                 {postImageUrl && (
@@ -40,16 +40,12 @@ const ProjectCard = ({ post, index }: { post: SanityDocument, index: number }) =
                                 src={postImageUrl}
                                 alt={post.title}
                                 width="400"
-                                className="rounded-xl shadow-lg"
+                                className="rounded-xl shadow-lg pointer-events-none"
                             />
-                            <span className="absolute bottom-0 left-0 pt-2 pb-3 pl-3 pr-3 text-white font-semibold rounded-xl rounded-tl-none rounded-br-none bg-background-50/90 backdrop-blur-sm backdrop-brightness-50">{post.title}</span>
+                            <span className="pointer-events-none absolute bottom-0 left-0 pt-2 pb-3 pl-3 pr-3 text-white font-semibold rounded-xl rounded-tl-none rounded-br-none bg-background-50/90 backdrop-blur-sm backdrop-brightness-50">{post.title}</span>
                         </div>
                     </motion.div>
                 )}
-                <div className="mt-6 hidden">
-                    <h2 className="text-xl font-semibold">{post.title}</h2>
-                    <p>{new Date(post.publishedAt).toLocaleDateString("en-GB")}</p>
-                </div>
             </Link>
         </motion.div>
     </>

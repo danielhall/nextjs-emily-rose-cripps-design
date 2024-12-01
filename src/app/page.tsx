@@ -14,7 +14,7 @@ export default async function IndexPage() {
 
   return (
     <>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 p-4">
+      <div className="columns-2 xs:columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 p-4">
         {posts.map((post, index) => (
             <ProjectCard key={post._id} post={post} index={index} />
         ))}
