@@ -5,7 +5,7 @@ import { client } from "@/sanity/client";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, image, publishedAt}`;
+]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt}`;
 
 const options = { next: { revalidate: 30 } };
 
