@@ -41,6 +41,7 @@ export default function Header() {
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 className="inline-block"
+                key="emily-rose"
               >
                 Emily-Rose
               </motion.span>
@@ -49,6 +50,7 @@ export default function Header() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
                 className="inline-block"
+                key="cripps"
               >
                 &nbsp;Cripps
               </motion.span>
@@ -57,6 +59,7 @@ export default function Header() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
                 className="inline-block"
+                key="design"
               >
                 &nbsp;Design
               </motion.span>
@@ -65,6 +68,7 @@ export default function Header() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
                 className="inline-block text-primary"
+                key="full-stop"
               >
                 .
               </motion.span>

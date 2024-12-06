@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import AnimationWrapper from "./components/animation-wrapper";
+
 import Header from "./components/header/header"
 
 const geistSans = localFont({
@@ -31,11 +33,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-primary`}
       >
         <Header/>
-        <main className="container mx-auto flex flex-col gap-4 text-white">
-          <div className="mt-24">
-            {children}
-          </div>
-        </main>
+        <AnimationWrapper>
+          <main className="container mx-auto flex flex-col gap-4 text-white">
+            <div className="mt-24">
+              {children}
+            </div>
+          </main>
+        </AnimationWrapper>
       </body>
     </html>
   );

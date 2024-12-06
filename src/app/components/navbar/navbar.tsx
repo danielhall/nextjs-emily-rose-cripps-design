@@ -13,6 +13,7 @@ function Navbar() {
         <ul className="hidden md:flex gap-x-6 font-semibold">
             <li>
             <Link 
+                key="nav-1"
                 className={pathname == "/" ? 
                     "nav-item nav-item--selected" : 
                     "nav-item"
@@ -23,6 +24,7 @@ function Navbar() {
             </li>
             <li>
             <Link 
+                key="nav-2"
                 className={pathname == "/contact" ? 
                     "nav-item nav-item--selected" : 
                     "nav-item"
@@ -32,7 +34,7 @@ function Navbar() {
             </Link>
             </li>
             <li>
-            <Link href="https://www.instagram.com/emilyrcrippsdesign/" target="_blank">
+            <Link key="nav-3" href="https://www.instagram.com/emilyrcrippsdesign/" target="_blank">
                 <span><InstagramLogoIcon className="inline-block mb-1"/></span>
             </Link>
             </li>
