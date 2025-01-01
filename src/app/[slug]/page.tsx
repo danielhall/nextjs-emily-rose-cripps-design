@@ -67,8 +67,7 @@ export default async function PostPage(params: {
           <Project post={post}/>
         </div>
       </div>
-      <span className="text-center text-3xl font-bold my-6">Image Gallery</span>
-          <Gallery images={postGalleryUrls} />
+      <Gallery images={postGalleryUrls} />
     </>
   );
 }
