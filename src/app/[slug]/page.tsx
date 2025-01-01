@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 
 import Project from "../components/project"
+import Gallery from '../components/gallery';
 
 const POST_QUERY = `
   *[_type == "post" && slug.current == $params.slug][0] {
@@ -42,6 +43,10 @@ export default async function PostPage(params: {
     ? urlFor(post.image)?.width(700).url()
     : null;
 
+  const postGalleryUrls = post.gallery
+    ? post.gallery.map((i: SanityImageSource) => (i ? urlFor(i)?.width(700).url() : null))
+    : [];
+
   return (
     <>
       <Link href="/" className="hover:underline">
@@ -62,6 +67,8 @@ export default async function PostPage(params: {
           <Project post={post}/>
         </div>
       </div>
+      <span className="text-center text-3xl font-bold my-6">Image Gallery</span>
+          <Gallery images={postGalleryUrls} />
     </>
   );
 }
