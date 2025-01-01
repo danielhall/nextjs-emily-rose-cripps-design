@@ -26,7 +26,7 @@ const ProjectCard = ({ post, index }: { post: SanityDocument, index: number }) =
         animate={{ opacity: 1, x: 0}}
         transition={{ delay: index / 50 }}
         key={post._id}>
-            <Link href={`${post.slug.current}`}>
+            <Link href={`/${post.slug.current}`}>
                 {postImageUrl && (
                     <motion.div
                             whileHover={{

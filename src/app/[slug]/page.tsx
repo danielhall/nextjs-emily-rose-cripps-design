@@ -6,7 +6,17 @@ import Link from "next/link";
 
 import Project from "../components/project"
 
-const POST_QUERY = `*[_type == "post" && slug.current == $params.slug][0]`;
+const POST_QUERY = `
+  *[_type == "post" && slug.current == $params.slug][0] {
+    ...,
+    tags[]-> {
+      _id,
+      title,
+      slug,
+      color
+    }
+  }
+`;
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>

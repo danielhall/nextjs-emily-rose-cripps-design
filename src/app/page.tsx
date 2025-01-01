@@ -7,7 +7,7 @@ const POSTS_QUERY = `*[
   && defined(slug.current)
 ]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt}`;
 
-const options = { next: { revalidate: 30 } };
+const options = { next: { revalidate: 120 } };
 
 export default async function IndexPage() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
