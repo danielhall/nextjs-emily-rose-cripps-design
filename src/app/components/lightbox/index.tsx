@@ -30,7 +30,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
   const handlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrev,
-    trackMouse: true,
+    trackMouse: true
   });
 
   // Close on click outside

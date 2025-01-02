@@ -18,16 +18,17 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   
     return (
       <div>
-        <div style={{ display: "flex", gap: "10px" }}>
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              style={{ width: "100px", cursor: "pointer" }}
-              onClick={() => openLightbox(index)}
-            />
-          ))}
+        <div className="grid grid-cols-12 gap-4">
+            {images.map((image, index) => (
+                <div key={index} className="col-span-2 md:col-span-2 pt-2 p-1">
+                    <img
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => openLightbox(index)}
+                    />
+                </div>
+            ))}
         </div>
         {isLightboxOpen && (
           <Lightbox
