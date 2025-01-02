@@ -4,7 +4,7 @@ import "./globals.css";
 
 import AnimationWrapper from "./components/animation-wrapper";
 
-import Header from "./components/header/header"
+import Header from "./components/header"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import logo from "../../assets/img/logo.png";
 import Image from "next/image";
-import Navbar from "../navbar/navbar";
+import Navbar from "../navbar";
 import Link from "next/link";
 import { motion } from "framer-motion"; // Correct import for framer-motion
 

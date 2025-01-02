@@ -1,5 +1,5 @@
 import { type SanityDocument } from "next-sanity";
-import ProjectCard from "./components/project-card"
+import ProjectCard from "../components/project-card"
 import { client } from "@/sanity/client";
 
 const POSTS_QUERY = `*[

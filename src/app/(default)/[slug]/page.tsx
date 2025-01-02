@@ -4,8 +4,8 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 
-import Project from "../components/project"
-import Gallery from '../components/gallery';
+import Project from "../../components/project-detail"
+import Gallery from '../../components/gallery';
 
 const POST_QUERY = `
   *[_type == "post" && slug.current == $params.slug][0] {
