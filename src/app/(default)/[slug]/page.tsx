@@ -6,15 +6,41 @@ import Project from "../../components/project-detail"
 
 const POST_QUERY = `
   *[_type == "post" && slug.current == $params.slug][0] {
-    ...,
-    tags[]-> {
+    _id,
+    title,
+    body,
+    slug,
+    image,
+    gallery,
+    publishedAt,
+    job->{
+      title, 
+      year, 
+      image
+    },
+    tags[]->{
       _id,
       title,
       slug,
-      color,
-      job->{title, year, image}
+      color
     }
   }
+`;
+
+
+const JOB_POSTS_QUERY = `
+  *[  
+    _type == "post" 
+    && job._id == $params.jobId
+    ]
+    | order(publishedAt desc)[0...18] 
+    {
+      _id, 
+      title, 
+      slug, 
+      image, 
+      publishedAt
+    }
 `;
 
 const options = { next: { revalidate: 30 } };
@@ -23,6 +49,14 @@ export default async function PostPage(params: {
   params: Promise<{ slug: string }>}) {
 
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
+
+  const jobPostParams = {
+    params: {
+      jobId: post.job._id
+    }
+  };
+
+  const jobPosts = await client.fetch<SanityDocument[]>(JOB_POSTS_QUERY, jobPostParams, options);
 
   if (!post) {
     return (
@@ -36,7 +70,7 @@ export default async function PostPage(params: {
       <Link href="/" className="hover:underline">
         ← Back to posts
       </Link>
-      <Project post={post}/>
+      <Project post={post} job={post.job} jobPosts={jobPosts}/>
     </>
   );
 }

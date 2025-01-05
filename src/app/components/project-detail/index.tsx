@@ -7,6 +7,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 
 import Gallery from '../../components/gallery';
+import CategoryScroller from '../../components/category-scroller';
 
 import Tag from '../tag'
 
@@ -16,7 +17,7 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-const Project = ({ post }: { post: SanityDocument }) => {
+const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDocument | undefined, jobPosts: SanityDocument[] }) => {
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(700).url()
     : null;
@@ -73,6 +74,7 @@ const Project = ({ post }: { post: SanityDocument }) => {
             </motion.span>
           </h1>
           <motion.div 
+            key={`${'div-body'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }} className="prose text-white">
@@ -82,11 +84,22 @@ const Project = ({ post }: { post: SanityDocument }) => {
 
           {postGalleryUrls && postGalleryUrls.length > 0 && (
             <motion.div 
+              key={`${'div-gallery'}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}>
               <h2 className="font-paimary text-2xl font-bold mb-5 mt-5">Gallery</h2>
               <Gallery images={postGalleryUrls} />
+            </motion.div>
+          )}
+
+          {job && jobPosts && jobPosts.length > 0 && (
+            <motion.div 
+              key={`${'div-job'}`} 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}>
+              <CategoryScroller title={`From ${job.title} (${job.year})`} items={jobPosts} />
             </motion.div>
           )}
         </div>

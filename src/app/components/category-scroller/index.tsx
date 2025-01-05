@@ -1,12 +1,23 @@
 "use client";
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { type SanityDocument } from "next-sanity";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import imageUrlBuilder from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+import { client } from "@/sanity/client";
 
 interface CategoryScrollerProps {
   title: string;
-  items: { id: string; imageUrl: string }[];
+  items: SanityDocument[];
 }
+
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) => 
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
 
 const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -45,13 +56,13 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
         >
           {items.map((item) => (
             <motion.div
-              key={item.id}
+              key={item._id}
               className="min-w-[250px] h-[225px] bg-gray-800 rounded overflow-hidden"
               whileHover={{ scale: 1.1 }}
               transition={{ type: 'spring', stiffness: 200 }}
             >
               <img
-                src={item.imageUrl}
+                src={`${urlFor(item.image)?.width(400).url() || ''}`}
                 alt=""
                 className="w-full h-full object-cover"
               />

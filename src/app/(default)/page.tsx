@@ -1,8 +1,10 @@
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import MasonryLayout from "../components/masonry-layout";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+import Introduction from "../components/introduction"
+import MasonryLayout from "../components/masonry-layout";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -27,6 +29,7 @@ export default async function IndexPage() {
   return (
     <div
       className="mt-10">
+      <Introduction/>
       <MasonryLayout 
           posts={imageUrls} 
           breakpoints={{ 480: 1, 768: 2, 1024: 4 }} 
