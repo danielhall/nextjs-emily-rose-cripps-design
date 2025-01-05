@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 
 import Lightbox from "../lightbox";
 
@@ -18,15 +19,25 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   
     return (
       <div>
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-4 mb-5">
             {images.map((image, index) => (
                 <div key={index} className="col-span-2 md:col-span-2 pt-2 p-1">
-                    <img
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        style={{ cursor: "pointer" }}
-                        onClick={() => openLightbox(index)}
-                    />
+                    <motion.div 
+                        whileHover={{
+                            scale: 1.04,
+                            transition: { duration: 0.3 },
+                        }}
+                        whileTap={{ scale: 1 }}
+                        className="w-56 h-56 overflow-hidden rounded-xl shadow-md">
+                        <img
+                            src={image}
+                            alt={`Thumbnail ${index + 1}`}
+                            style={{ cursor: "pointer" }}
+                            className={"w-full h-full object-cover"}
+                            onClick={() => openLightbox(index)}
+                        />
+                    </motion.div>
+                    
                 </div>
             ))}
         </div>
