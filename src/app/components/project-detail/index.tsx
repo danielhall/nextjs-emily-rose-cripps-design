@@ -88,7 +88,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}>
-              <h2 className="font-paimary text-2xl font-bold mb-5 mt-5">Gallery</h2>
+              <h2 className="text-xl font-semibold text-white mt-5 mb-5">Gallery</h2>
               <Gallery images={postGalleryUrls} />
             </motion.div>
           )}

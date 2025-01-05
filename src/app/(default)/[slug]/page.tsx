@@ -14,6 +14,7 @@ const POST_QUERY = `
     gallery,
     publishedAt,
     job->{
+      _id,
       title, 
       year, 
       image
@@ -29,18 +30,19 @@ const POST_QUERY = `
 
 
 const JOB_POSTS_QUERY = `
-  *[  
+  *[
     _type == "post" 
-    && job._id == $params.jobId
-    ]
-    | order(publishedAt desc)[0...18] 
-    {
-      _id, 
-      title, 
-      slug, 
-      image, 
-      publishedAt
-    }
+    && job->_id == $params.jobId
+  ]
+  | order(publishedAt desc)[0...18] 
+  {
+    _id, 
+    title, 
+    slug, 
+    image, 
+    job,
+    publishedAt
+  }
 `;
 
 const options = { next: { revalidate: 30 } };

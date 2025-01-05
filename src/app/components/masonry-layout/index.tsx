@@ -69,7 +69,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                     }}
                                     whileTap={{ scale: 1 }}
                                     src={post.image}
-                                    alt={`Image ${imageIndex}`}
+                                    alt={`${post.name}`}
                                     className="w-full object-cover rounded-lg shadow"
                                     layoutId={`${post.id}`}
                                     initial={{ opacity: 0 }}
