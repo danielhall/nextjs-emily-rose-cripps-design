@@ -79,8 +79,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                 <span 
                                     className="pointer-events-none absolute top-1 right-1 p-2 text-white font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
                                         opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <motion.span
-                                        layoutId={`title-${post.id}`}>{post.name}</motion.span>
+                                    {post.name}
                                     <ArrowRightIcon className="inline-block ml-1 mb-1"/>
                                 </span>
                         </motion.div>

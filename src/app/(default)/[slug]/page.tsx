@@ -1,11 +1,8 @@
 import { type SanityDocument } from "next-sanity";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 
 import Project from "../../components/project-detail"
-import Gallery from '../../components/gallery';
 
 const POST_QUERY = `
   *[_type == "post" && slug.current == $params.slug][0] {
@@ -14,16 +11,11 @@ const POST_QUERY = `
       _id,
       title,
       slug,
-      color
+      color,
+      job->{title, year, image}
     }
   }
 `;
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 const options = { next: { revalidate: 30 } };
 
@@ -39,17 +31,12 @@ export default async function PostPage(params: {
       </main>);
   }
 
-  const postGalleryUrls = post.gallery
-    ? post.gallery.map((i: SanityImageSource) => (i ? urlFor(i)?.width(700).url() : null))
-    : [];
-
   return (
     <>
       <Link href="/" className="hover:underline">
         ← Back to posts
       </Link>
       <Project post={post}/>
-      <Gallery images={postGalleryUrls} />
     </>
   );
 }

@@ -6,6 +6,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 
+import Gallery from '../../components/gallery';
+
 import Tag from '../tag'
 
 const { projectId, dataset } = client.config();
@@ -18,6 +20,10 @@ const Project = ({ post }: { post: SanityDocument }) => {
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(700).url()
     : null;
+
+  const postGalleryUrls = post.gallery
+    ? post.gallery.map((i: SanityImageSource) => (i ? urlFor(i)?.width(700).url() : null))
+    : [];
 
   return (
     <>
@@ -48,12 +54,7 @@ const Project = ({ post }: { post: SanityDocument }) => {
             )}
           </motion.div>
 
-          <motion.h1 
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      exit={{ opacity: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      layoutId={`title-${post.id}`}
+          <h1 
             className="font-secondary text-4xl font-bold mb-8">
             <motion.span
               initial={{ x: -10, opacity: 0 }}
@@ -70,14 +71,24 @@ const Project = ({ post }: { post: SanityDocument }) => {
               className="inline-block text-primary">
               .
             </motion.span>
-          </motion.h1>
+          </h1>
           <motion.div 
-            initial={{ opacity: 0.1 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }} className="prose text-white">
+            transition={{ delay: 0.2 }} className="prose text-white">
             {Array.isArray(post.body) && <PortableText value={post.body} />}
 
           </motion.div>
+
+          {postGalleryUrls && postGalleryUrls.length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}>
+              <h2 className="font-paimary text-2xl font-bold mb-5 mt-5">Gallery</h2>
+              <Gallery images={postGalleryUrls} />
+            </motion.div>
+          )}
         </div>
       </div>
 
