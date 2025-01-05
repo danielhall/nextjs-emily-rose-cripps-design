@@ -38,10 +38,6 @@ export default async function PostPage(params: {
         <span>We couldn&apos;t find that</span>
       </main>);
   }
-  
-  const postImageUrl = post.image
-    ? urlFor(post.image)?.width(700).url()
-    : null;
 
   const postGalleryUrls = post.gallery
     ? post.gallery.map((i: SanityImageSource) => (i ? urlFor(i)?.width(700).url() : null))
@@ -52,21 +48,7 @@ export default async function PostPage(params: {
       <Link href="/" className="hover:underline">
         ← Back to posts
       </Link>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-6 md:col-span-6 p-2">
-          {postImageUrl && (
-            <img
-              src={postImageUrl}
-              alt={post.title}
-              className="rounded-xl shadow-md"
-              width="700"
-            />
-          )}
-        </div>
-        <div className="col-span-6 md:col-span-6 p-2">
-          <Project post={post}/>
-        </div>
-      </div>
+      <Project post={post}/>
       <Gallery images={postGalleryUrls} />
     </>
   );
