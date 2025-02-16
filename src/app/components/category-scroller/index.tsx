@@ -38,20 +38,20 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-white mt-5 mb-2">{title}</h2>
+      <h2 className="text-xl font-semibold  mt-5 mb-2">{title}</h2>
       
       {/* Group Row */}
       <div className="relative">
         {/* Scroll Buttons */}
         <button
           onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full hidden group-row:hover:block"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50  p-2 rounded-full hidden group-row:hover:block"
         >
           <FaChevronLeft size={20} />
         </button>
         <button
           onClick={() => scroll('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full hidden group-row:hover:block"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50  p-2 rounded-full hidden group-row:hover:block"
         >
           <FaChevronRight size={20} />
         </button>
@@ -65,7 +65,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
             // Group Image now correctly scoped
             <motion.div
               key={item._id}
-              className="flex-none w-48 h-48 text-white flex items-center justify-center snap-start group relative"
+              className="flex-none w-48 h-48  flex items-center justify-center snap-start group relative"
               whileHover={{
                 scale: 1.04,
                 transition: { duration: 0.3 },
@@ -86,7 +86,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
                 transition={{ duration: 0.2 }}
               />
               <span 
-                className="pointer-events-none absolute top-1 right-1 p-2 text-white font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
+                className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
                     opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {item.title}
                 <ArrowRightIcon className="inline-block ml-1 mb-1"/>

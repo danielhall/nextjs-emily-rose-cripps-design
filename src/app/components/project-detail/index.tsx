@@ -77,7 +77,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
             key={`${'div-body'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }} className="prose text-white">
+            transition={{ delay: 0.2 }} className="prose ">
             {Array.isArray(post.body) && <PortableText value={post.body} />}
 
           </motion.div>
@@ -88,7 +88,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}>
-              <h2 className="text-xl font-semibold text-white mt-5 mb-5">Gallery</h2>
+              <h2 className="text-xl font-semibold  mt-5 mb-5">Gallery</h2>
               <Gallery images={postGalleryUrls} />
             </motion.div>
           )}

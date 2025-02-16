@@ -30,12 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-primary`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-primary select-none`}
       >
         <Header/>
         <AnimationWrapper>
-          <main className="container mx-auto flex flex-col gap-4 text-white">
-            <div className="mt-24">
+          <main className="container mx-auto flex flex-col gap-4 ">
+            <div className="mt-32">
               {children}
             </div>
           </main>

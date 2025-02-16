@@ -7,7 +7,7 @@ const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
   && defined(job) 
-]|order(publishedAt desc){_id, title, slug, image, job->{title}, publishedAt}`;
+]|order(publishedAt desc){_id, title, slug, image, job->{title, year}, publishedAt}`;
 
 const options = { next: { revalidate: 120 } };
 
@@ -40,6 +40,7 @@ export default async function IndexPage() {
 
   return (
     <>
+      <h1 className="font-secondary text-4xl font-bold mb-8">Productions</h1>
       <div className="min-h-screen space-y-8">
       {categories.map((category, idx) => (
         <CategoryScroller

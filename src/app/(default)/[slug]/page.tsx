@@ -1,6 +1,5 @@
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import Link from "next/link";
 
 import Project from "../../components/project-detail"
 
@@ -33,6 +32,7 @@ const JOB_POSTS_QUERY = `
   *[
     _type == "post" 
     && job->_id == $params.jobId
+    && _id != $params.currentPostId
   ]
   | order(publishedAt desc)[0...18] 
   {
@@ -54,7 +54,8 @@ export default async function PostPage(params: {
 
   const jobPostParams = {
     params: {
-      jobId: post.job._id
+      jobId: post.job._id,
+      currentPostId: post._id
     }
   };
 
@@ -69,9 +70,6 @@ export default async function PostPage(params: {
 
   return (
     <>
-      <Link href="/" className="hover:underline">
-        ← Back to posts
-      </Link>
       <Project post={post} job={post.job} jobPosts={jobPosts}/>
     </>
   );

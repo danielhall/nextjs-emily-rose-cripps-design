@@ -43,7 +43,7 @@ const ProjectCard = ({ post, index }: { post: SanityDocument, index: number }) =
                                 className="rounded-xl shadow-lg pointer-events-none"
                             />
                             <span 
-                              className="pointer-events-none absolute bottom-0 left-0 pt-2 pb-3 pl-3 pr-3 text-white font-secondary rounded-xl rounded-tl-none rounded-br-none bg-background-50/90 backdrop-blur-sm backdrop-brightness-50">
+                              className="pointer-events-none absolute bottom-0 left-0 pt-2 pb-3 pl-3 pr-3  font-secondary rounded-xl rounded-tl-none rounded-br-none bg-background-50/90 backdrop-blur-sm backdrop-brightness-50">
                                 {post.title}
                             </span>
                         </div>

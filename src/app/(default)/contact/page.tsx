@@ -1,126 +1,126 @@
 'use client';
 
-import { useState } from 'react';
-import * as RadixLabel from '@radix-ui/react-label';
+import { motion, useAnimationControls } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Image from "next/image";
 
-export default function ContactForm() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<string | null>(null);
+import ContactForm from '../../components/contact-form';
+import EmilyImage from "../../assets/img/emily.jpeg";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+import { IoMdHand } from "react-icons/io";
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const AnimatedHandIcon = () => {
+  const controls = useAnimationControls();
+  const animationRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isMounted, setIsMounted] = useState(false); 
+  const pathName = usePathname();
 
-    try {
-      setStatus('Sending...');
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  useEffect(() => {
+    setIsMounted(true);
 
-      if (response.ok) {
-        setStatus('Message sent!');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus('Error sending message. Please try again.');
+    const startAnimation = () => {
+      const animation = async () => {
+        try {
+          while (pathName === '/') { // Check isMounted within the loop
+            if (controls 
+              && typeof controls.start === 'function'
+              && pathName === '/') { 
+              await controls.start({
+                x: 2, 
+                y: -1, 
+                rotate: 1, 
+                transition: { duration: 0.5 }, 
+              });
+              await controls.start({
+                x: -2, 
+                y: 1, 
+                rotate: -4, 
+                transition: { duration: 0.5 }, 
+              });
+            }
+          }
+        }
+        catch {
+
+        }
+        
+      };
+
+      animation();
+    };
+
+    // Delay the animation start by a small amount (e.g., 100ms)
+    setTimeout(() => {
+      if (controls && typeof controls.start === 'function') { 
+        startAnimation();
       }
-    } catch (error) {
-      setStatus('Error sending message. Please try again.');
-      console.error(error);
-    }
-  };
+    }, 100); 
+
+    return () => {
+      setIsMounted(false); 
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+      controls.stop(); 
+    };
+  }, [controls, isMounted, pathName]);
 
   return (
     <>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-6 md:col-span-6 p-6">
+      <h1 
+            className="font-secondary text-4xl font-bold mb-8">
+            Contact Me.
+          </h1>
+          <motion.div 
+      layoutId={`contact-me`}
+      className="rounded-lg grid grid-cols-12 mb-6 "
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        clipPath: 'inset(0 round 0.75rem)', // Clip-path applied here too
+      }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}>
+      <motion.div layout className="col-span-1 p-5">
+        <div className="relative">
+          <Image
+            src={EmilyImage.src}
+            alt="Logo"
+            height={100}
+            width={100}
+            className="inline rounded-full shadow-lg"
+          />
+          <div className="absolute bottom-0 left-0">
+            <motion.div 
+              animate={controls} 
+              className="inline-flex items-center justify-center"
+            >
+              <IoMdHand className="text-yellow-500 w-12 h-12" />
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+      <motion.div layout className="col-span-10 pt-5 pl-6">
+        <h1 className="font-secondary text-lg mb-2">Hi, I&apos;m Emily!</h1>
+        <p>I&apos;m a multi-disciplined graphic designer focusing in the field of graphic design for film and television.</p>
+        <p>Welcome to my portfolio. Don&apos;t hesitate to reach out if you&apos;re interested in working together.</p>
+      </motion.div>
+      
+      <div className="col-span-6 md:col-span-6 p-6">
           <h2 className="text-2xl font-bold mb-6 mt-5">Hi, I&apos;m Emily!</h2>
           <p>Emily is a multi-disciplined graphic designer focussing in the field Graphic Design for film, television, theatre and prop making although is constantly experimenting in various fields.</p><br/>
-          <p>Emily’s work has been showcased around Edinburgh during their ‘Giraffe About Town’ 2022 event, had group work shortlisted for the Creative Conscious Design Award 2022 and has had work exhibited at the ‘Note to Self’ exhibition hosted by Glimpse in 2023.</p><br/>
-          <p>An avid musical theatre fan, she is guaranteed to be rocking out to show tunes whilst designing...it’s cooler than it sounds. When not designing, Emily can be found hanging upside down from an aerial hoop, reading or cooing over animals great and small.</p><br/>
-          <p>If you are interested in Emily’s work, please use the contact form below to get in touch.</p>
+            <p>Emily’s work has been showcased around Edinburgh during their ‘Giraffe About Town’ 2022 event, had group work shortlisted for the Creative Conscious Design Award 2022 and has had work exhibited at the ‘Note to Self’ exhibition hosted by Glimpse in 2023.</p><br/>
+            <p>An avid musical theatre fan, she is guaranteed to be rocking out to show tunes whilst designing...it’s cooler than it sounds. When not designing, Emily can be found hanging upside down from an aerial hoop, reading or cooing over animals great and small.</p><br/>
+            <p>If you are interested in Emily’s work, please use the contact form below to get in touch.</p>
         </div>
 
         <div className="col-span-6 md:col-span-6 p-6">
-          
-          <div className="float-right mr-auto max-w-xl w-full p-6 rounded-lg shadow-lg bg-background-50/90 backdrop-blur-lg backdrop-brightness-50"> 
-            <h2 className="text-2xl font-bold mb-6">Contact Emily</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <RadixLabel.Root
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Name
-                </RadixLabel.Root>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <RadixLabel.Root
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Email
-                </RadixLabel.Root>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-              </div>
-
-              <div className="mb-6">
-                <RadixLabel.Root
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Message
-                </RadixLabel.Root>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full p-3 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-primary hover:bg-primary text-black py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                Send
-              </button>
-            </form>
-
-            {status && <p className="text-center text-sm mt-4">{status}</p>}
-          </div>
-
+          <ContactForm />
         </div>
-      </div>
-
-      
+    </motion.div>
     </>
+    
   );
-}
+};
+
+export default AnimatedHandIcon;

@@ -34,7 +34,7 @@ const AnimatedHandIcon = () => {
               await controls.start({
                 x: -2, 
                 y: 1, 
-                rotate: -1, 
+                rotate: -4, 
                 transition: { duration: 0.5 }, 
               });
             }
@@ -67,12 +67,15 @@ const AnimatedHandIcon = () => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 2 }}
-      className="bg-primary rounded-xl grid grid-cols-12 mb-6 text-black">
-      <div className="col-span-1 p-5">
+      layoutId={`contact-me`}
+      className="bg-primary rounded-lg grid grid-cols-12 mb-6 text-black"
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        clipPath: 'inset(0 round 0.75rem)', // Clip-path applied here too
+      }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}>
+      <motion.div layout className="col-span-1 p-5">
         <div className="relative">
           <Image
             src={EmilyImage.src}
@@ -90,12 +93,12 @@ const AnimatedHandIcon = () => {
             </motion.div>
           </div>
         </div>
-      </div>
-      <div className="col-span-9 pt-5 pl-6">
+      </motion.div>
+      <motion.div layout className="col-span-9 pt-5 pl-6">
         <h1 className="font-secondary text-lg mb-2">Hi, I&apos;m Emily!</h1>
         <p>I&apos;m a multi-disciplined graphic designer focusing in the field of graphic design for film and television.</p>
         <p>Welcome to my portfolio. Don&apos;t hesitate to reach out if you&apos;re interested in working together.</p>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
