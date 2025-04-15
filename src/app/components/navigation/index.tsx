@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 
-import { InstagramLogoIcon, EnvelopeClosedIcon, HomeIcon, RocketIcon } from "@radix-ui/react-icons"
+import { InstagramLogoIcon } from "@radix-ui/react-icons"
 
 function Navbar() {
   const pathname = usePathname();
@@ -15,33 +15,33 @@ function Navbar() {
             <Link 
                 key="nav-1"
                 className={pathname == "/" ? 
-                    "nav-item nav-item--selected" : 
+                    "nav-item--selected bg-bookmark" : 
                     "nav-item"
                 }
                 href="/">
-                <span><HomeIcon className="inline-block mb-1"/> <span className="inline-block pl-1">Home</span></span>
+                <span>Home</span>
             </Link>
             </li>
             <li>
             <Link 
                 key="nav-2"
                 className={pathname == "/productions" ? 
-                    "nav-item nav-item--selected" : 
+                    "nav-item--selected bg-bookmark" : 
                     "nav-item"
                 }
                 href="/productions">
-                <span><RocketIcon className="inline-block mb-1"/> <span className="inline-block pl-1">Productions</span></span>
+                <span>Productions</span>
             </Link>
             </li>
             <li>
             <Link 
                 key="nav-3"
                 className={pathname == "/contact" ? 
-                    "nav-item nav-item--selected" : 
+                    "nav-item--selected bg-bookmark" : 
                     "nav-item"
                 }
                 href="/contact">
-                <span><EnvelopeClosedIcon className="inline-block mb-1"/> <span className="inline-block pl-1">Contact</span></span>
+                <span>Contact</span>
             </Link>
             </li>
             <li>

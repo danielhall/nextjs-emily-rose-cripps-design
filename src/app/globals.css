@@ -1,34 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Vidaloka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #222222;
-  --foreground: #ededed;
+  --background: #FFFFFF;
+  --foreground: #222222;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #222222;
-    --foreground: #ededed;
+    --background: #FFFFFF;
+    --foreground: #222222;
   }
+}
+
+html {
+  background-color: var(--background);
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  background: linear-gradient(190deg, rgba(34,34,34,1) 0%, rgba(34,34,34,1) 67%, rgba(31,59,61,1) 100%);
-  background-attachment: fixed;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Goudy Bookletter 1911", serif;
 }
 
 .nav-item {
-  border-bottom: 0px;
-  padding: 10px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 75px 20px 50px 20px;
 }
 
 .nav-item--selected {
-  border-bottom: 3px solid rgb(95 192 197 / var(--tw-text-opacity, 1));
+  text-transform: uppercase;
+  font-weight:bold;
+  display: inline-block;
+  padding: 100px 20px 50px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
+  
+/* Outer shadow */
+filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.3));
+
+/* Inner shadow */
+box-shadow: inset 0px 0px 10px rgba(11, 83, 69, 0.2);
 }

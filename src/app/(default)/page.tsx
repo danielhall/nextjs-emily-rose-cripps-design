@@ -3,7 +3,6 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-import Introduction from "../components/introduction"
 import MasonryLayout from "../components/masonry-layout";
 
 const POSTS_QUERY = `*[
@@ -29,7 +28,6 @@ export default async function IndexPage() {
   return (
     <div
       >
-      <Introduction/>
       <MasonryLayout 
           posts={masonryPosts} 
           breakpoints={{ 480: 1, 768: 2, 1024: 4 }} 

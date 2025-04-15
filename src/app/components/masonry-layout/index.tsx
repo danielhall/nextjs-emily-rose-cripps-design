@@ -47,18 +47,18 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
     const router = useRouter();
 
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-8">
             {columnArrays.map((column, columnIndex) => (
                 <div 
                     key={columnIndex} 
-                    className="flex-1 space-y-4">
+                    className="flex-1 space-y-8">
                     {column.map((post, imageIndex) => (
                         <motion.div
                             key={imageIndex}
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0}}
                             transition={{ delay: (columnIndex + imageIndex) / 50 }}
-                            className="relative group cursor-pointer rounded-lg"
+                            className="relative group cursor-pointer"
 
                             onClick={() => router.push(`/${post.url}`)}
                             >
@@ -70,7 +70,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                     whileTap={{ scale: 1 }}
                                     src={post.image}
                                     alt={`${post.name}`}
-                                    className="w-full object-cover rounded-lg shadow"
+                                    className="w-full object-cover shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-solid"
                                     layoutId={`${post.id}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}

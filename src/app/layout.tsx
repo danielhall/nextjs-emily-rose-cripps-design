@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
 import "./globals.css";
 
 import AnimationWrapper from "./components/animation-wrapper";
@@ -30,12 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-primary select-none`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-header bg-top antialiased font-primary select-none`}
       >
         <Header/>
         <AnimationWrapper>
           <main className="container mx-auto flex flex-col gap-4 ">
-            <div className="mt-32">
+            <div className="mt-64">
               {children}
             </div>
           </main>
