@@ -15,7 +15,7 @@ function Navbar() {
             <Link 
                 key="nav-1"
                 className={pathname == "/" ? 
-                    "nav-item--selected bg-bookmark" : 
+                    "nav-item nav-item--selected" : 
                     "nav-item"
                 }
                 href="/">
@@ -26,7 +26,7 @@ function Navbar() {
             <Link 
                 key="nav-2"
                 className={pathname == "/productions" ? 
-                    "nav-item--selected bg-bookmark" : 
+                    "nav-item nav-item--selected" : 
                     "nav-item"
                 }
                 href="/productions">
@@ -37,7 +37,7 @@ function Navbar() {
             <Link 
                 key="nav-3"
                 className={pathname == "/contact" ? 
-                    "nav-item--selected bg-bookmark" : 
+                    "nav-item nav-item--selected" : 
                     "nav-item"
                 }
                 href="/contact">

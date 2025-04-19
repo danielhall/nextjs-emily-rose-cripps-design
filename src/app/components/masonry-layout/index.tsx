@@ -58,7 +58,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0}}
                             transition={{ delay: (columnIndex + imageIndex) / 50 }}
-                            className="relative group cursor-pointer"
+                            className="relative group cursor-pointer border-solid border-black border-5 inv-rad-4"
 
                             onClick={() => router.push(`/${post.url}`)}
                             >
@@ -70,7 +70,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                     whileTap={{ scale: 1 }}
                                     src={post.image}
                                     alt={`${post.name}`}
-                                    className="w-full object-cover shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-solid"
+                                    className="w-full"
                                     layoutId={`${post.id}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
