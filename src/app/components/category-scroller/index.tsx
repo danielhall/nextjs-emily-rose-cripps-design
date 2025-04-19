@@ -38,8 +38,6 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold  mt-5 mb-2">{title}</h2>
-      
       {/* Group Row */}
       <div className="relative">
         {/* Scroll Buttons */}
@@ -76,15 +74,18 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
               transition={{ delay: 0.1 }}
               onClick={() => router.push(`/${item.slug.current}`)}
             >
-              <motion.img
-                src={`${urlFor(item.image)?.width(400).url() || ''}`}
-                alt={`${item.title}`}
-                className="w-full h-full object-cover rounded-md shadow-md cursor-pointer"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              />
+              {item.image && (
+
+                <motion.img
+                  src={`${urlFor(item.image)?.width(400).url() || ''}`}
+                  alt={`${item.title}`}
+                  className="w-full h-full object-cover rounded-md shadow-md cursor-pointer"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                />
+              )}
               <span 
                 className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
                     opacity-0 group-hover:opacity-100 transition-opacity duration-300">
