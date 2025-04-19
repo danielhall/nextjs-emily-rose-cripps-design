@@ -26,15 +26,13 @@ body {
 }
 
 .nav-item {
+  margin-top:20px;
   font-size:19px;
-  display: inline-block;
-  margin: 100px 20px 50px 20px;
+  line-height: 25px;
 }
 
 .nav-item--selected {
   font-weight:bold;
-  display: inline-block;
-  margin: 100px 20px 50px 20px;
   padding-bottom: 5px;
   border-bottom: 3px solid;
   text-decoration: none;

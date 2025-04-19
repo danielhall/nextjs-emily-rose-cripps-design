@@ -35,7 +35,7 @@ export default function RootLayout({
       >
         <Header/>
         <AnimationWrapper>
-          <main className="container mx-auto flex flex-col gap-4 ">
+          <main className="container mx-auto pl-6 pr-4 sm:p-0">
             <div className="mt-6">
               {children}
             </div>

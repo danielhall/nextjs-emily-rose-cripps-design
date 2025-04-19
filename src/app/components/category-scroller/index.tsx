@@ -57,7 +57,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
         {/* Scrollable Thumbnails */}
         <motion.div
           ref={scrollRef}
-          className="flex overflow-x-auto space-x-3 snap-x snap-mandatory scrollbar-hide p-3"
+          className="flex overflow-x-auto space-x-3 snap-x snap-mandatory scrollbar-hide p-0 sm:p-3"
         >
           {items.map((item) => (
             // Group Image now correctly scoped
@@ -79,7 +79,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
                 <motion.img
                   src={`${urlFor(item.image)?.width(400).url() || ''}`}
                   alt={`${item.title}`}
-                  className="w-full h-full object-cover rounded-md shadow-md cursor-pointer"
+                  className="w-full h-full object-cover rounded-md shadow-md cursor-pointer bg-black"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -88,7 +88,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
               )}
               <span 
                 className="pointer-events-none absolute bottom-0 left-0 p-2 font-semibold rounded-b-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full">
                 {item.title}
               </span>
             </motion.div>

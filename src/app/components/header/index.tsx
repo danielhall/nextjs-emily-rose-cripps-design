@@ -1,12 +1,11 @@
 "use client";
 
 import logo from "../../assets/img/logo.svg";
+import logoMob from "../../assets/img/logo-mob.svg";
 import Image from "next/image";
-import Navbar from "../navigation";
 import Link from "next/link";
 
-import { CgEditBlackPoint } from "react-icons/cg";
-
+import { usePathname } from 'next/navigation';
 
 const getOrdinalSuffix = (n: number): string => {
   if (n > 3 && n < 21) return 'th';
@@ -35,16 +34,51 @@ const formatDateWithSuffix = (date: Date): JSX.Element => {
 };
 
 export default function Header() {
+  const pathname = usePathname();
   const today = new Date();
 
   return (
     <header
       className={`bg-triangle bg-top bg-repeat-x pt-2 pb-2 pl-10 pr-10 top-0 left-0 right-0 z-10 transition-all`}
     >
-    <div className="flex justify-between items-center h-20 w-full px-4">
+    <div className="flex justify-between items-center md:h-20 w-full px-4">
       {/* Navbar Section */}
       <div className="flex justify-center items-center">
-        <Navbar />
+      <ul className="hidden lg:flex gap-x-6 font-semibold text-center">
+            <li>
+            <Link 
+                key="nav-1"
+                className={pathname == "/" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/">
+                <span>Home</span>
+            </Link>
+            </li>
+            <li>
+            <Link 
+                key="nav-2"
+                className={pathname == "/productions" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/productions">
+                <span>Film & TV</span>
+            </Link>
+            </li>
+            <li>
+            <Link 
+                key="nav-3"
+                className={pathname == "/contact" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/contact">
+                <span>Other Projects</span>
+            </Link>
+            </li>
+        </ul>
       </div>
       
       {/* Logo Section */}
@@ -55,14 +89,55 @@ export default function Header() {
             alt="Logo"
             height={100}
             width={1000}
-            className="inline pt-12 pl-6 pr-6"
+            className="hidden md:block inline pt-12 lg:pl-6 lg:pr-6 md:min-w-[500px]"
+          />
+          <Image
+            src={logoMob.src}
+            alt="Logo"
+            height={200}
+            width={200}
+            className="block md:hidden inline pt-6 pl-6 pr-6"
           />
         </Link>
       </div>
 
       {/* Navbar Section */}
       <div className="flex justify-center items-center">
-        <Navbar />
+      <ul className="hidden lg:flex font-semibold text-center items-center space-x-4 m-0">
+            <li>
+            <Link 
+                key="nav-1"
+                className={pathname == "/" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/">
+                <span>Bookish Things</span>
+            </Link>
+            </li>
+            <li>
+            <Link 
+                key="nav-2"
+                className={pathname == "/productions" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/productions">
+                <span>Theatre Reimagined</span>
+            </Link>
+            </li>
+            <li>
+            <Link 
+                key="nav-3"
+                className={pathname == "/contact" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/contact">
+                <span>Contact</span>
+            </Link>
+            </li>
+        </ul>
       </div>
     </div>
 
