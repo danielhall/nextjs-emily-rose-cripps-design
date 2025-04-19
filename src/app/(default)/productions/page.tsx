@@ -11,7 +11,7 @@ export default async function Page() {
 
   return (
   <>
-    <h1 className="uppercase font-secondary text-4xl font-bold mb-8">Productions</h1>
+    <h1 className="font-primary text-2xl font-bold mb-8">Productions</h1>
     <Productions posts={posts} />
   </>);
 }

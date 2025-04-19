@@ -87,10 +87,9 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
                 />
               )}
               <span 
-                className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
+                className="pointer-events-none absolute bottom-0 left-0 p-2 font-semibold rounded-b-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
                     opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {item.title}
-                <ArrowRightIcon className="inline-block ml-1 mb-1"/>
               </span>
             </motion.div>
           ))}
