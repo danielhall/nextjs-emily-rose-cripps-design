@@ -3,7 +3,7 @@ import { type SanityDocument } from "next-sanity";
 import Productions from "../../components/productions";
 
 const POSTS_QUERY = `*[_type == "post" && defined(slug.current) && defined(job)] | order(publishedAt desc) {
-  _id, title, slug, image, job->{title, year, portraitPoster, landscapePoster}, publishedAt
+  _id, title, slug, image, job->{title, introduction, year, portraitPoster, landscapePoster}, publishedAt
 }`;
 
 export default async function Page() {

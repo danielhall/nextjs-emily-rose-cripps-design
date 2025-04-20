@@ -11,6 +11,7 @@ import { client } from "@/sanity/client";
 
 type Category = {
   title: string;
+  introduction: string;
   year: string;
   items: SanityDocument[];
   portraitPoster: string;
@@ -52,6 +53,7 @@ export default function Productions({ posts }: Props) {
       if (jobIndex <= -1) {
         categories.push({
           title: job.title,
+          introduction: job.introduction,
           year: job.year,
           portraitPoster: portraitPosterUrl ?? "",
           landscapePoster: landscapePosterUrl ?? "",
@@ -94,7 +96,7 @@ export default function Productions({ posts }: Props) {
                       {category.title} <span className="text-[#CCCCCC] pl-2">{category.year}</span>
                     </h2>
                     <p className="text-sm w-[220px] sm:w-[200px]">
-                      Emily is going to write some delicious content here. Emily is going to write some delicious content here. Emily is going to write some delicious content here. Emily is going to write some delicious content here.
+                      {category.introduction}
                     </p>
                   </div>
                 </div>

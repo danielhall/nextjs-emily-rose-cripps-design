@@ -20,7 +20,7 @@ const getLuminance = (hex: string) => {
   };
 
 export default function Tag({ tag, index }: { tag: SanityDocument, index: number }) {
-    const showTooltipOnLoad: boolean = index === 1;
+    const showTooltipOnLoad: boolean = index === 0;
 
     const [textColor, setTextColor] = useState('');
     const [showTooltip, setShowTooltip] = useState(showTooltipOnLoad);
@@ -29,7 +29,7 @@ export default function Tag({ tag, index }: { tag: SanityDocument, index: number
         // Calculate luminance of the background color
         const luminance = getLuminance(tag.color.hex);
         // If luminance is high (bright background), use black text, else use white text
-        setTextColor(luminance > 0.5 ? 'text-black' : '');
+        setTextColor(luminance > 0.5 ? 'text-black' : 'text-white');
 
         if (showTooltipOnLoad) {
             // Show the tooltip with a delay on page load
@@ -57,7 +57,7 @@ export default function Tag({ tag, index }: { tag: SanityDocument, index: number
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 + (index/10) }}
                     key={`tag-${index}`}
-                    className={`px-3 py-1 text-sm font-medium rounded-full m-1 ${textColor} hover:outline hover:outline-2 hover:outline-white hover:outline-offset-2`}
+                    className={`px-3 py-1 text-sm font-medium rounded-full m-1 ${textColor}`}
                     style={{ backgroundColor: tag.color.hex }}
                     >
                     <IoPricetagOutline className="inline-block mb-1" /> {tag.title}
@@ -67,7 +67,7 @@ export default function Tag({ tag, index }: { tag: SanityDocument, index: number
             <Tooltip.Portal>
             <Tooltip.Content sideOffset={10}>
                 <motion.div
-                className="px-2 py-1 text-sm  bg-gray-800 rounded shadow"
+                className="px-2 py-1 text-sm text-white bg-gray-800 rounded shadow"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
