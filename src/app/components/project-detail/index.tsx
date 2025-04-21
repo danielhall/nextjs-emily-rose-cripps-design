@@ -50,7 +50,9 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
             className="float-right">
             {post.tags && (
               post.tags.map((tag: SanityDocument, index: number) => (
-                <Tag key={`tag-${index}`} tag={tag} index={index} />
+                <div className="inline-block p-1" key={`tag-${index}`}>
+                  <Tag key={`tag-${index}`} tag={tag} index={index} />
+                </div>
               ))
             )}
           </motion.div>

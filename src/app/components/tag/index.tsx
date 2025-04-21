@@ -7,29 +7,11 @@ import { motion } from "framer-motion";
 
 import { IoPricetagOutline } from "react-icons/io5";
 
-const getLuminance = (hex: string) => {
-    // Convert hex to RGB
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-  
-    // Normalize the RGB values to [0, 1] and calculate luminance
-    const a = [r, g, b].map((x) => x / 255).map((x) => (x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4)));
-    const luminance = 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
-    return luminance;
-  };
-
 export default function Tag({ tag, index }: { tag: SanityDocument, index: number }) {
     const showTooltipOnLoad: boolean = index === 0;
-
-    const [textColor, setTextColor] = useState('');
     const [showTooltip, setShowTooltip] = useState(showTooltipOnLoad);
 
     useEffect(() => {
-        // Calculate luminance of the background color
-        const luminance = getLuminance(tag.color.hex);
-        // If luminance is high (bright background), use black text, else use white text
-        setTextColor(luminance > 0.5 ? 'text-black' : 'text-white');
 
         if (showTooltipOnLoad) {
             // Show the tooltip with a delay on page load
@@ -57,8 +39,7 @@ export default function Tag({ tag, index }: { tag: SanityDocument, index: number
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 + (index/10) }}
                     key={`tag-${index}`}
-                    className={`px-3 py-1 text-sm font-medium rounded-full m-1 ${textColor}`}
-                    style={{ backgroundColor: tag.color.hex }}
+                    className={`focus:outline-none m-x-2 m-y-4 z-20 p-1 font-semibold rounded bg-[#AAA] bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-20`}
                     >
                     <IoPricetagOutline className="inline-block mb-1" /> {tag.title}
                     </motion.span>
