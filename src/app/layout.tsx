@@ -43,10 +43,8 @@ export default async function RootLayout({
   const tags = await client.fetch<SanityDocument[]>(TAG_QUERY);
 
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-main antialiased font-primary select-none`}
-      >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-main antialiased font-primary select-none`}>
+      <body>
         <Header/>
         <AnimationWrapper>
           <main className="container mx-auto pl-6 pr-4 sm:p-0">
