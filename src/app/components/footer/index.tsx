@@ -1,7 +1,7 @@
 "use client";
 
 import { SanityDocument } from "next-sanity";
-import { SiInstagram, SiX, SiLinkedin, SiWordpress, SiEtsy } from "react-icons/si";
+import { FaInstagram, FaImdb, FaLinkedin, FaEtsy } from "react-icons/fa";
 
 import Tag from "../../components/tag";
 
@@ -33,12 +33,11 @@ export default function Footer({ tags }: { tags: SanityDocument[] }) {
       <div className="flex flex-none align-top">
         <div>
           <nav>
-            <ul className="list-none inline text-xl">
-              <li className="inline-block m-1"><a href="#"><SiInstagram/></a></li>
-              <li className="inline-block m-1"><a href="#"><SiX/></a></li>
-              <li className="inline-block m-1"><a href="#"><SiLinkedin/></a></li>
-              <li className="inline-block m-1"><a href="#"><SiWordpress/></a></li>
-              <li className="inline-block m-1"><a href="#"><SiEtsy/></a></li>
+            <ul className="list-none inline text-3xl">
+              <li className="inline-block m-1"><a href="#"><FaInstagram/></a></li>
+              <li className="inline-block m-1"><a href="#"><FaImdb/></a></li>
+              <li className="inline-block m-1"><a href="#"><FaLinkedin/></a></li>
+              <li className="inline-block m-1"><a href="#"><FaEtsy/></a></li>
             </ul>
           </nav>
           <p className="block mt-1 ml-1">Copyright &#169; { today.getFullYear() } Emily-Rose Cripps</p>

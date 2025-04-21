@@ -44,7 +44,7 @@ export default function Header() {
     <div className="flex justify-between items-center md:h-20 w-full px-4">
       {/* Navbar Section */}
       <div className="flex justify-center items-center">
-      <ul className="hidden lg:flex gap-x-6 font-semibold text-center">
+      <ul className="hidden lg:flex gap-x-3 font-semibold text-center">
             <li>
             <Link 
                 key="nav-1"
@@ -88,7 +88,7 @@ export default function Header() {
             src={logo.src}
             alt="Logo"
             height={100}
-            width={1000}
+            width={600}
             className="hidden md:block inline pt-12 lg:pl-6 lg:pr-6 md:min-w-[500px]"
           />
           <Image
