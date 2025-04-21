@@ -1,14 +1,10 @@
 'use client';
 
-import { motion, useAnimationControls } from 'framer-motion';
+import { useAnimationControls } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Image from "next/image";
 
 import ContactForm from '../../components/contact-form';
-import EmilyImage from "../../assets/img/emily.jpeg";
-
-import { IoMdHand } from "react-icons/io";
 
 const AnimatedHandIcon = () => {
   const controls = useAnimationControls();

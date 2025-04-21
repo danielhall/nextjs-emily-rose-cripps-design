@@ -5,7 +5,7 @@ export default async function Page() {
   <>
     <h1 className="font-primary text-2xl font-bold mb-8">Privacy Policy</h1>
     <div className="prose max-w-none">
-      <p>This website collects personal information posted via the contact form on the &apos;Contact&apos; page (<a href="/contact">here</a>).</p>
+      <p>This website collects personal information posted via the contact form on the &apos;Contact&apos; page.</p>
       
       <h2>What personal identification information is collected</h2>
       <p>If you submit your information via the contact form, the following personal information is collected.</p>
@@ -18,7 +18,7 @@ export default async function Page() {
       <p>Personal information entered in the contact form is used by the site administrator to respond to your message.</p>
       
       <h2>Who that personal identification information is shared with</h2>
-      <p>Your personal information is shared with the site administrator (Emily-Rose Cripps). The contact form is emailed directly to Emily, and the data isn't otherwise stored on a server.</p>
+      <p>Your personal information is shared with the site administrator (Emily-Rose Cripps). The contact form is emailed directly to Emily, and the data isn&apos;t otherwise stored on a server.</p>
       
       <h2>Links</h2>
       <p>This site links off to external sites that host their own privacy policies. We are not responsible for the privacy practises of any linked site.</p>
