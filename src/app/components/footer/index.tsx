@@ -3,6 +3,8 @@
 import { SanityDocument } from "next-sanity";
 import { FaInstagram, FaImdb, FaLinkedin, FaEtsy } from "react-icons/fa";
 
+import Link from "next/link";
+
 import Tag from "../../components/tag";
 
 
@@ -38,7 +40,7 @@ export default function Footer({ tags }: { tags: SanityDocument[] }) {
             </ul>
           </nav>
           <p className="block mt-1 ml-1">Copyright &#169; { today.getFullYear() } Emily-Rose Cripps</p>
-          <p className="block ml-1"><a href="#">Privacy Policy</a></p>
+          <p className="block ml-1"><Link href="/privacy">Privacy Policy</Link></p>
         </div>
       </div>
       <div className="flex flex-wrap align-top w-full">

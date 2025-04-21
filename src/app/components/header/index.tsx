@@ -51,12 +51,12 @@ export default function Header() {
   const navLeft = [
     { href: "/", label: "Home" },
     { href: "/productions", label: "Film & TV" },
-    { href: "/contact", label: "Other Projects" },
+    { href: "/portfolio", label: "Other Projects" },
   ];
 
   const navRight = [
-    { href: "/", label: "Bookish Things" },
-    { href: "/productions", label: "Theatre Reimagined" },
+    { href: "/coming-soon/bookish-things", label: "Bookish Things" },
+    { href: "/coming-soon/theatre-reimagined", label: "Theatre Reimagined" },
     { href: "/contact", label: "Contact" },
   ];
 
