@@ -7,8 +7,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { useRouter } from "next/navigation";
 
-import { ArrowRightIcon } from "@radix-ui/react-icons"
-
 import { client } from "@/sanity/client";
 
 interface CategoryScrollerProps {
@@ -22,7 +20,7 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => {
+const CategoryScroller: React.FC<CategoryScrollerProps> = ({ items }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {

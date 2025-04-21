@@ -19,7 +19,8 @@ interface MasonryProps {
 }
 
 const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 1024: 3 } }) => {
-    const [columns, setColumns] = useState(getColumns(window.innerWidth));
+    const windowWidth = (typeof window !== "undefined") ? window.innerWidth : 0;
+    const [columns, setColumns] = useState(getColumns(windowWidth));
 
     // Calculate number of columns based on breakpoints
     function getColumns(windowWidth: number): number {
@@ -31,6 +32,8 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
     }
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
+
         const handleResize = () => setColumns(getColumns(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);

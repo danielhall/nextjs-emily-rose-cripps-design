@@ -48,6 +48,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
       if (e.key === "Escape") onClose();
     };
 
+    if (typeof window === "undefined") return;
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
