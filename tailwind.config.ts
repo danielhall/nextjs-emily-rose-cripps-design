@@ -21,8 +21,8 @@ export default {
         secondary: ["Vidaloka", "serif"]
       },
       backgroundImage: {
-        'main' : "url('./assets/img/background-texture.jpg')",
-        'triangle' : "url('./assets/img/triangle.png')",
+        'main': "url('/assets/img/background-texture.jpg')",
+        'triangle': "url('/assets/img/triangle.png')",
       }
     },
   },
