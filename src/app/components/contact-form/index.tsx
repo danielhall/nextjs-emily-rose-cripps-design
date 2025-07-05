@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import * as RadixLabel from '@radix-ui/react-label';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
