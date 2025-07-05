@@ -6,6 +6,18 @@ import "./globals.css";
 import AnimationWrapper from "./components/animation-wrapper";
 
 import Header from "./components/header"
+import Footer from "./components/footer";
+
+import { type SanityDocument } from "next-sanity";
+import { client } from "@/sanity/client";
+
+const TAG_QUERY = `
+  *[
+    _type == "tag"
+    && defined(slug.current)
+    && defined(title) 
+  ]|order(publishedAt desc){_id, title, color { hex }, slug}
+`;
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,24 +35,25 @@ export const metadata: Metadata = {
   description: "The online portfolio of Emily-Rose Cripps - a graphic design artist for Film & TV",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const tags = await client.fetch<SanityDocument[]>(TAG_QUERY);
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-main antialiased font-primary select-none`}
-      >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-main antialiased font-primary select-none`}>
+      <body>
         <Header/>
         <AnimationWrapper>
-          <main className="container mx-auto flex flex-col gap-4 ">
-            <div className="mt-32">
+          <main className="container mx-auto pl-6 pr-4 sm:p-0">
+            <div className="mt-6">
               {children}
             </div>
           </main>
         </AnimationWrapper>
+        <Footer tags={tags} />
       </body>
     </html>
   );

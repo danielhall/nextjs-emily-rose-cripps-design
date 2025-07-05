@@ -7,8 +7,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { useRouter } from "next/navigation";
 
-import { ArrowRightIcon } from "@radix-ui/react-icons"
-
 import { client } from "@/sanity/client";
 
 interface CategoryScrollerProps {
@@ -22,7 +20,7 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => {
+const CategoryScroller: React.FC<CategoryScrollerProps> = ({ items }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -38,8 +36,6 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold  mt-5 mb-2">{title}</h2>
-      
       {/* Group Row */}
       <div className="relative">
         {/* Scroll Buttons */}
@@ -59,7 +55,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
         {/* Scrollable Thumbnails */}
         <motion.div
           ref={scrollRef}
-          className="flex overflow-x-auto space-x-3 snap-x snap-mandatory scrollbar-hide p-3"
+          className="flex overflow-x-auto space-x-3 snap-x snap-mandatory scrollbar-hide p-0 sm:p-3"
         >
           {items.map((item) => (
             // Group Image now correctly scoped
@@ -76,20 +72,22 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ title, items }) => 
               transition={{ delay: 0.1 }}
               onClick={() => router.push(`/${item.slug.current}`)}
             >
-              <motion.img
-                src={`${urlFor(item.image)?.width(400).url() || ''}`}
-                alt={`${item.title}`}
-                className="w-full h-full object-cover rounded-md shadow-md cursor-pointer"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              />
+              {item.image && (
+
+                <motion.img
+                  src={`${urlFor(item.image)?.width(400).url() || ''}`}
+                  alt={`${item.title}`}
+                  className="w-full h-full object-cover rounded-md shadow-md cursor-pointer bg-black"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                />
+              )}
               <span 
-                className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                className="pointer-events-none absolute bottom-0 left-0 p-2 font-semibold rounded-b-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full">
                 {item.title}
-                <ArrowRightIcon className="inline-block ml-1 mb-1"/>
               </span>
             </motion.div>
           ))}

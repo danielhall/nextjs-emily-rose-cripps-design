@@ -26,18 +26,33 @@ body {
 }
 
 .nav-item {
-  font-size:19px;
-  display: inline-block;
-  margin: 100px 20px 50px 20px;
-}
-
-.nav-item--selected {
-  font-weight:bold;
+  font-size:15px;
+  line-height: 20px;
   display: inline-block;
   margin: 100px 20px 50px 20px;
   padding-bottom: 5px;
   border-bottom: 3px solid;
+  border-color:transparent;
   text-decoration: none;
-  font-weight: bold;
-  position: relative;
+}
+
+.nav-item--selected {
+  margin: 100px 20px 50px 20px;
+  border-color:#000000;
+}
+
+.nav-item-mob {
+  font-size:15px;
+  line-height: 20px;
+  display: inline-block;
+  margin: 10px 10px 10px 10px;
+  padding-bottom: 5px;
+  border-bottom: 3px solid;
+  border-color:transparent;
+  text-decoration: none;
+}
+
+.nav-item-mob--selected {
+  margin: 10px 10px 10px 10px;
+  border-color:#000000;
 }

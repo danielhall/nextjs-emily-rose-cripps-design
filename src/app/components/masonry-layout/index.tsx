@@ -19,18 +19,29 @@ interface MasonryProps {
 }
 
 const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 1024: 3 } }) => {
-    const [columns, setColumns] = useState(getColumns(window.innerWidth));
+    const windowWidth = (typeof window !== "undefined") ? window.innerWidth : 0;
+    const [columns, setColumns] = useState(getColumns(windowWidth));
 
     // Calculate number of columns based on breakpoints
     function getColumns(windowWidth: number): number {
         const sortedBreakpoints = Object.keys(breakpoints)
             .map(Number)
             .sort((a, b) => a - b);
-
-        return sortedBreakpoints.reduce((acc, bp) => (windowWidth >= bp ? breakpoints[bp] : acc), 1);
+    
+        // Default to 2 instead of 1
+        let columns = 2;
+        sortedBreakpoints.forEach(bp => {
+            if (windowWidth >= bp) {
+                columns = breakpoints[bp];
+            }
+        });
+    
+        return columns;
     }
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
+
         const handleResize = () => setColumns(getColumns(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -58,7 +69,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0}}
                             transition={{ delay: (columnIndex + imageIndex) / 50 }}
-                            className="relative group cursor-pointer border-solid border-black border-5 inv-rad-4"
+                            className="relative group cursor-pointer max-h-[400px] overflow-hidden border border-double border-black border-[3px] "
 
                             onClick={() => router.push(`/${post.url}`)}
                             >
@@ -70,16 +81,17 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                     whileTap={{ scale: 1 }}
                                     src={post.image}
                                     alt={`${post.name}`}
-                                    className="w-full"
+                                    className="w-full bg-black h-full object-cover"
                                     layoutId={`${post.id}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0, duration: 1 }}
                                     transition={{ duration: 0.2 }}
+                                    
                                 />
                                 <span 
-                                    className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-10
-                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md backdrop-blur-sm backdrop-brightness-50
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
                                     {post.name}
                                     <ArrowRightIcon className="inline-block ml-1 mb-1"/>
                                 </span>

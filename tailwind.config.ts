@@ -11,6 +11,15 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        'slide-down': {
+          '0%': { opacity: '0', transform: 'translateY(-10%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-down': 'slide-down 0.3s ease-out forwards',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -21,7 +30,9 @@ export default {
         secondary: ["Vidaloka", "serif"]
       },
       backgroundImage: {
-        'main' : "url('./assets/img/background-texture.jpg')",
+        'main': "url('/assets/img/background-texture.jpg')",
+        'triangle': "url('/assets/img/triangle.png')",
+        'postcard': "url('/assets/img/postcard.png')",
       }
     },
   },

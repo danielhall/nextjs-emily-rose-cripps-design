@@ -50,27 +50,31 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
             className="float-right">
             {post.tags && (
               post.tags.map((tag: SanityDocument, index: number) => (
-                <Tag key={`tag-${index}`} tag={tag} index={index} />
+                <div className="inline-block p-1" key={`tag-${index}`}>
+                  <Tag key={`tag-${index}`} tag={tag} index={index} />
+                </div>
               ))
             )}
           </motion.div>
 
-          <h1 
-            className="font-secondary text-4xl font-bold mb-8">
+          <h1>
+            {job?.title && (
+                <motion.span
+                initial={{ x: -10, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                className="block font-secondary text-2xl font-bold">
+                  {job.title}
+                </motion.span>
+
+            )}
             <motion.span
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="inline-block"
+              className="inline-block font-secondary text-4xl font-bold mb-5"
             >
               {post.title}
-            </motion.span>
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block text-primary">
-              .
             </motion.span>
           </h1>
           <motion.div 
@@ -99,6 +103,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}>
+              <h2 className="text-xl font-semibold  mt-5 mb-2">More from {job.title}...</h2>
               <CategoryScroller title={`From ${job.title} (${job.year})`} items={jobPosts} />
             </motion.div>
           )}
