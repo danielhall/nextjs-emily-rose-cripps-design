@@ -64,17 +64,11 @@ const AnimatedHandIcon = () => {
 
   return (
     <>
-      <h1 
-            className="font-secondary text-4xl font-bold mb-8">
-            Contact Me.
-          </h1>
-
-
         <div className="col-span-6 md:col-span-6 p-6">
           <ContactForm />
         </div>
     </>
-    
+     
   );
 };
 

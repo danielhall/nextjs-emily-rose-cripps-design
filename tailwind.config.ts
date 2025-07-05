@@ -32,6 +32,7 @@ export default {
       backgroundImage: {
         'main': "url('/assets/img/background-texture.jpg')",
         'triangle': "url('/assets/img/triangle.png')",
+        'postcard': "url('/assets/img/postcard.png')",
       }
     },
   },
