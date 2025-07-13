@@ -61,7 +61,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
                 </p>
                 <Link 
                   href={`/${heroPost.slug.current}`}
-                  className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-[#4fb2b5] transition-colors font-medium"
                 >
                   View Graphic
                   <ArrowRightIcon className="w-4 h-4" />
@@ -125,14 +125,14 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="bg-black text-white rounded-lg p-8"
+          className="bg-primary text-white rounded-lg p-8"
         >
           <h2 className="font-primary text-2xl md:text-3xl font-semibold mb-4">
             Ready to Work Together?
           </h2>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+          <p className="mb-6 max-w-2xl mx-auto">
             I&apos;m always excited to take on new projects and collaborate with creative teams. 
-            Let&apos;s discuss how we can bring your vision to life.
+            <br/>Let&apos;s discuss how we can bring your vision to life.
           </p>
           <Link 
             href="/contact"

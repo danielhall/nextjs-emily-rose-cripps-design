@@ -24,7 +24,7 @@ export default function Header({ tags }: { tags: SanityDocument[] }) {
               width={500}
               height={150}
               priority
-              className="w-auto h-16 md:h-32"
+              className="w-auto h-32 md:h-32"
             />
           </Link>
         </div>
