@@ -3,7 +3,7 @@ export default async function Page() {
 
   return (
   <>
-    <h1 className="font-primary text-2xl font-bold mb-8">Privacy Policy</h1>
+    <h1 className="font-primary text-2xl font-semibold mb-8">Privacy Policy</h1>
     <div className="prose max-w-none">
       <p>This website collects personal information posted via the contact form on the &apos;Contact&apos; page.</p>
       

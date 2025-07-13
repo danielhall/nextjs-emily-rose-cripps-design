@@ -23,7 +23,7 @@ const Introduction = () => {
         </div>
       </motion.div>
       <motion.div layout className="col-span-8 flex flex-col justify-center pl-6">
-        <h1 className="font-primary text-3xl font-bold mb-4">Hi, I&apos;m Emily!</h1>
+        <h1 className="font-primary text-3xl font-semibold mb-4">Hi, I&apos;m Emily!</h1>
         <p className="mb-3">I&apos;m a multi-disciplined graphic designer focusing in the field of graphic design for film and television.</p>
         <p>Welcome to my portfolio. Don&apos;t hesitate to reach out if you&apos;re interested in working together.</p>
       </motion.div>

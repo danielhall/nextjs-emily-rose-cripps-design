@@ -33,7 +33,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="relative overflow-hidden rounded-lg border-2 border-black aspect-square group cursor-pointer bg-white"
+                    className="relative overflow-hidden rounded-lg shadow-lg aspect-square group cursor-pointer bg-white"
                     onClick={() => openLightbox(index)}
                 >
                     <img
@@ -41,7 +41,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                         alt={`Gallery image ${index + 1}`}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
                     
                     {/* View overlay */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

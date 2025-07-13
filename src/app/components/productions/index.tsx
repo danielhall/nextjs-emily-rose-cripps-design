@@ -58,7 +58,7 @@ export default function Productions({ posts }: Props) {
             className="group"
           >
             <Link href={`/production/${production.slug}`}>
-              <div className="bg-white border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer">
                 <div className="flex">
                   {/* Portrait Poster */}
                   <div className="w-32 h-48 flex-shrink-0">
@@ -81,7 +81,7 @@ export default function Productions({ posts }: Props) {
                   <div className="flex-1 p-6 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-bold text-black group-hover:text-gray-700 transition-colors">
+                        <h3 className="text-xl font-semibold text-black group-hover:text-gray-700 transition-colors">
                           {production.title}
                         </h3>
                         <span className="text-gray-600 text-sm font-medium">

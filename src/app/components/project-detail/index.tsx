@@ -78,11 +78,11 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
             transition={{ duration: 0.4, delay: 0.25 }}
           >
             {job?.title && (
-                <span className="block font-primary text-2xl font-bold">
+                <span className="block font-primary text-2xl font-semibold">
                   {job.title}
                 </span>
             )}
-            <span className="inline-block font-primary text-4xl font-bold mb-5">
+            <span className="inline-block font-primary text-4xl font-semibold mb-5">
               {post.title}
             </span>
           </motion.h1>

@@ -80,7 +80,7 @@ export default async function ProductionPage({
             />
           )}
           <div>
-            <h1 className="font-primary text-3xl font-bold mb-2">
+            <h1 className="font-primary text-3xl font-semibold mb-2">
               {job?.title}
             </h1>
             <p className="text-gray-600 mb-2">{job?.year}</p>

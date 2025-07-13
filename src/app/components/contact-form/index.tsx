@@ -113,7 +113,7 @@ const ContactForm: React.FC = () => {
           className={`w-full py-4 rounded-lg font-medium transition-colors duration-300 ${
             isSubmitting
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-black hover:bg-gray-800 text-white'
+              : 'bg-primary hover:bg-primary/90 text-white'
           }`}
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}

@@ -77,7 +77,7 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ items }) => {
               transition={{ delay: index * 0.1 }}
               onClick={() => router.push(`/${item.slug.current}`)}
             >
-              <div className="relative overflow-hidden rounded-lg border-2 border-black aspect-[4/3] bg-white">
+              <div className="relative overflow-hidden rounded-lg shadow-lg aspect-[4/3] bg-white">
                 {item.image && (
                   <motion.img
                     src={`${urlFor(item.image)?.width(400).url() || ''}`}

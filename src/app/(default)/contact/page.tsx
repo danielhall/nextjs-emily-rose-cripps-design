@@ -20,7 +20,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <span className="text-sm text-gray-600 uppercase tracking-wide">Get In Touch</span>
-            <h1 className="font-primary text-4xl md:text-5xl font-bold mt-2 mb-6">
+            <h1 className="font-primary text-4xl md:text-5xl font-semibold mt-2 mb-6">
               Let&apos;s Work Together
             </h1>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
@@ -39,7 +39,7 @@ export default function ContactPage() {
             className="p-8 md:p-12"
           >
             <div className="max-w-2xl mx-auto">
-              <h2 className="font-primary text-2xl font-bold mb-6 text-center">
+              <h2 className="font-primary text-2xl font-semibold mb-6 text-center">
                 Send Me a Message
               </h2>
               <ContactForm />
@@ -53,9 +53,9 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="bg-white border-2 border-black rounded-lg p-6"
+            className="bg-gray-100 shadow-lg rounded-lg p-6"
           >
-            <h3 className="font-primary text-xl font-bold mb-4">What I Do</h3>
+            <h3 className="font-primary text-xl font-semibold mb-4">What I Do</h3>
             <ul className="space-y-2 text-gray-700">
               <li>• Brand Identity & Logo Design</li>
               <li>• Print & Digital Graphics</li>
@@ -68,9 +68,9 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="bg-white border-2 border-black rounded-lg p-6"
+            className="bg-gray-100 shadow-lg rounded-lg p-6"
           >
-            <h3 className="font-primary text-xl font-bold mb-4">Let&apos;s Connect</h3>
+            <h3 className="font-primary text-xl font-semibold mb-4">Let&apos;s Connect</h3>
             <p className="text-gray-700 mb-4">
               Ready to start your project? Send me a message and I&apos;ll get back to you as soon as I can.
             </p>

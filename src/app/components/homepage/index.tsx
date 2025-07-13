@@ -52,7 +52,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
                 transition={{ duration: 0.6 }}
               >
                 <span className="text-sm text-gray-600 uppercase tracking-wide">Featured Work</span>
-                <h1 className="font-primary text-4xl md:text-5xl font-bold mt-2 mb-4">
+                <h1 className="font-primary text-4xl md:text-5xl font-semibold mt-2 mb-4">
                   {heroPost.title}
                 </h1>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed md:pr-6">
@@ -79,7 +79,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
               >
                 {heroImageUrl && (
                   <Link href={`/${heroPost.slug.current}`}>
-                    <div className="relative overflow-hidden rounded-lg border-2 border-black aspect-[4/3] group cursor-pointer">
+                    <div className="relative overflow-hidden rounded-lg shadow-lg aspect-[4/3] group cursor-pointer">
                       <motion.img
                         src={heroImageUrl}
                         alt={heroPost.title}
@@ -95,18 +95,6 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
         </section>
       )}
 
-      {/* Introduction Section */}
-      <section>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-gray-50 rounded-lg md:p-8"
-        >
-          <Introduction />
-        </motion.div>
-      </section>
-
       {/* Recent Work Section */}
       <section>
         <motion.div
@@ -117,7 +105,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
           <div className="flex items-center justify-between mb-8">
             <div>
               <span className="text-sm text-gray-600 uppercase tracking-wide">Latest Projects</span>
-              <h2 className="font-primary text-3xl font-bold mt-2">Recent Work</h2>
+              <h2 className="font-primary text-3xl font-semibold mt-2">Recent Work</h2>
             </div>
             <Link 
               href="/portfolio"
@@ -140,7 +128,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
           transition={{ duration: 0.6, delay: 0.8 }}
           className="bg-black text-white rounded-lg p-8"
         >
-          <h2 className="font-primary text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="font-primary text-2xl md:text-3xl font-semibold mb-4">
             Ready to Work Together?
           </h2>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
