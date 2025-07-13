@@ -12,8 +12,14 @@ export default async function Page() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
   return (
-  <>
-    <h1 className="font-primary text-2xl font-bold mb-8">Productions</h1>
+  <div className="max-w-6xl mx-auto px-4">
+    <div className="mb-8">
+      <small className="text-gray-600">Browse by</small>
+      <h1 className="font-primary text-3xl font-bold mb-4">Productions</h1>
+      <p className="text-gray-700 mb-8">
+        Explore my work organized by film and television productions. Each production showcases the design work I contributed to the project.
+      </p>
+    </div>
     <Productions posts={posts} />
-  </>);
+  </div>);
 }

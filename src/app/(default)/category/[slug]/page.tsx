@@ -57,7 +57,7 @@ export default async function CategoryPage(params: {
 
   return (
     <>
-      <small>Works tagged with</small>
+      <small className="text-gray-600">Works tagged with</small>
       <h1 className="font-primary text-3xl font-bold mb-8">{tag[0].title}</h1>
       <GridLayout 
           posts={masonryPosts} 
