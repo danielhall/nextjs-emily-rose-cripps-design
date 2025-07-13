@@ -33,6 +33,8 @@ export default async function IndexPage() {
 
   return (
     <div>
+      <small>Explore my</small>
+      <h1 className="font-primary text-3xl font-bold mb-8">Portfolio</h1>
       <GridLayout 
           posts={masonryPosts} 
       />

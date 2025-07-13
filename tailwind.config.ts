@@ -26,7 +26,7 @@ export default {
         primary: "#5DBFC1"
       },
       fontFamily: {
-        primary: ["'Patrick Hand SC'", "cursive"],
+        primary: ["'Josefin Sans'", "sans-serif"],
         secondary: ["'Patrick Hand SC'", "cursive"],
         handsome: ["handsome-pro", "sans-serif"]
       },

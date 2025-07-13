@@ -12,7 +12,7 @@ export default function Footer({ tags }: { tags: SanityDocument[] }) {
   const today = new Date();
 
   return (
-    <footer className={`mt-2 pt-4 pb-2 pl-10 pr-10 top-0 left-0 right-0 z-10 transition-all`} >
+    <footer className={`container mx-auto sm:p-0 mt-20 transition-all`} >
 
       <div className="mt-4 mb-8 flex flex flex-col sm:flex-row ">
         {/* Left line */}

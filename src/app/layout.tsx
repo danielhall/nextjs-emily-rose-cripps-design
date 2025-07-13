@@ -10,7 +10,6 @@ import Footer from "./components/footer";
 
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import Navigation from "./components/navigation";
 
 const TAG_QUERY = `
   *[
@@ -19,17 +18,6 @@ const TAG_QUERY = `
     && defined(title) 
   ]|order(publishedAt desc){_id, title, color { hex }, slug}
 `;
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Emily-Rose Cripps Design",
@@ -44,20 +32,14 @@ export default async function RootLayout({
   const tags = await client.fetch<SanityDocument[]>(TAG_QUERY);
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased font-primary select-none`}>
+    <html lang="en" className={`bg-white antialiased font-primary select-none`}>
       <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" />
         <link rel="stylesheet" href="https://use.typekit.net/ogv2gni.css" />
       </head>
       <body>
-
-        <header className="container mx-auto sm:p-0 mb-20">
-          <div className="inline-block">
-            <p className="ml-2 mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
-          </div>
-          <Navigation />
-        </header>
-        
+        <Header tags={tags} />
         <AnimationWrapper>
           <main className="container mx-auto sm:p-0">
             <div className="mt-6">

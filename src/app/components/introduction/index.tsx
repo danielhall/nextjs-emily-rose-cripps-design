@@ -95,7 +95,7 @@ const AnimatedHandIcon = () => {
         </div>
       </motion.div>
       <motion.div layout className="col-span-9 pt-5 pl-6">
-        <h1 className="font-secondary text-lg mb-2">Hi, I&apos;m Emily!</h1>
+        <h1 className="font-primary text-lg mb-2">Hi, I&apos;m Emily!</h1>
         <p>I&apos;m a multi-disciplined graphic designer focusing in the field of graphic design for film and television.</p>
         <p>Welcome to my portfolio. Don&apos;t hesitate to reach out if you&apos;re interested in working together.</p>
       </motion.div>

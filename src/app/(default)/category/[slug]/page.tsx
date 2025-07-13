@@ -3,7 +3,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-import MasonryLayout from "../../../components/masonry-layout";
+import GridLayout from "../../../components/grid-layout";
 
 const POSTS_QUERY = `
   *[
@@ -45,16 +45,21 @@ export default async function CategoryPage(params: {
   const tag = await client.fetch<SanityDocument[]>(TAG_QUERY, params, options);
 
   const masonryPosts = posts
-      ? posts.map((i: SanityDocument) => (i ? { id: i._id, name: i.title, image: urlFor(i.image)?.width(700).url().toString(), url: i.slug.current } : null)).filter((item): item is { id: string, name: string, image: string, url: string } => !!item)
+      ? posts.map((i: SanityDocument) => (i ? { 
+          id: i._id, 
+          name: i.title, 
+          image: urlFor(i.image)?.width(500).url().toString(), 
+          url: i.slug.current,
+          description: i.description
+        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
   return (
     <>
       <small>Works tagged with</small>
-      <h1 className="font-secondary text-4xl font-bold mb-8">{tag[0].title}</h1>
-      <MasonryLayout 
+      <h1 className="font-primary text-3xl font-bold mb-8">{tag[0].title}</h1>
+      <GridLayout 
           posts={masonryPosts} 
-          breakpoints={{ 480: 1, 768: 2, 1024: 4 }} 
       />
     </>
   );
