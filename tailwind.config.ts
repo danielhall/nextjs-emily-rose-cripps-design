@@ -23,15 +23,14 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#5fc0c5"
+        primary: "#5DBFC1"
       },
       fontFamily: {
-        primary: ["Goudy Bookletter 1911", "serif"],
-        secondary: ["Vidaloka", "serif"]
+        primary: ["'Patrick Hand SC'", "cursive"],
+        secondary: ["Vidaloka", "serif"],
+        handsome: ["handsome-pro", "sans-serif"]
       },
       backgroundImage: {
-        'main': "url('/assets/img/background-texture.jpg')",
-        'triangle': "url('/assets/img/triangle.png')",
         'postcard': "url('/assets/img/postcard.png')",
       }
     },

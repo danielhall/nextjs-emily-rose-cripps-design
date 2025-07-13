@@ -82,7 +82,7 @@ export default function Header() {
     ));
 
   return (
-    <header className="bg-triangle bg-top bg-repeat-x pt-2 pb-2 pl-10 pr-10 top-0 left-0 right-0 z-10 transition-all">
+    <header className="bg-top bg-repeat-x pt-2 pb-2 pl-10 pr-10 top-0 left-0 right-0 z-10 transition-all">
       <div className="flex justify-between items-center md:h-20 w-full px-4">
         {/* Left Nav (Desktop) */}
         <div className="hidden lg:flex justify-center items-center">

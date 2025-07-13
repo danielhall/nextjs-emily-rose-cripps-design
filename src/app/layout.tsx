@@ -43,9 +43,14 @@ export default async function RootLayout({
   const tags = await client.fetch<SanityDocument[]>(TAG_QUERY);
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-main antialiased font-primary select-none`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased font-primary select-none`}>
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" />
+        <link rel="stylesheet" href="https://use.typekit.net/ogv2gni.css" />
+      </head>
       <body>
-        <Header/>
+        <p className="ml-[46] mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
+
         <AnimationWrapper>
           <main className="container mx-auto pl-6 pr-4 sm:p-0">
             <div className="mt-6">
