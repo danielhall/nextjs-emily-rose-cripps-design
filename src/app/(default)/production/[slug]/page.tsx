@@ -95,7 +95,7 @@ export default async function ProductionPage({
 
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-4">
-          Projects ({posts.length})
+          Graphics ({posts.length})
         </h2>
       </div>
 

@@ -96,11 +96,11 @@ export default function Productions({ posts }: Props) {
 
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-500">
-                        {production.itemCount} project{production.itemCount !== 1 ? 's' : ''}
+                        {production.itemCount} graphic{production.itemCount !== 1 ? 's' : ''}
                       </span>
                       
                       <div className="flex items-center text-black group-hover:text-gray-700 transition-colors">
-                        <span className="text-sm font-medium mr-2">View Projects</span>
+                        <span className="text-sm font-medium mr-2">View Graphics</span>
                         <ArrowRightIcon className="w-4 h-4" />
                       </div>
                     </div>

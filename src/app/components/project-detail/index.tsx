@@ -63,7 +63,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
                 initial={{ x: -10, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="block font-secondary text-2xl font-bold">
+                className="block font-primary text-2xl font-bold">
                   {job.title}
                 </motion.span>
 
@@ -72,7 +72,7 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="inline-block font-secondary text-4xl font-bold mb-5"
+              className="inline-block font-primary text-4xl font-bold mb-5"
             >
               {post.title}
             </motion.span>
