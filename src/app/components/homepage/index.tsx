@@ -22,7 +22,7 @@ interface HomepageProps {
 
 export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: HomepageProps) {
   return (
-    <div className="mx-auto px-4 space-y-16">
+    <div className="mx-auto px-4 md:px-0 space-y-16">
       {/* Hero Section with Featured Work */}
       {heroPost && (
         <section className="relative">
@@ -38,13 +38,13 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
                   {heroPost.title}
                 </h1>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  {heroPost.description || "Explore my latest design work showcasing creativity and attention to detail in film and television graphics."}
+                  {heroPost.description}
                 </p>
                 <Link 
                   href={`/${heroPost.slug.current}`}
                   className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
                 >
-                  View Project
+                  View Graphic
                   <ArrowRightIcon className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -81,7 +81,7 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-gray-50 rounded-lg p-8"
+          className="bg-gray-50 rounded-lg md:p-8"
         >
           <Introduction />
         </motion.div>
