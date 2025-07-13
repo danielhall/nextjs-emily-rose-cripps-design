@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { PortableText, type SanityDocument } from 'next-sanity';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
@@ -28,26 +28,41 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
 
   return (
     <>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-6 md:col-span-6 p-2">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <motion.div 
+          className="p-2"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
           {postImageUrl && (
             <motion.img
-              layoutId={`${post._id}`}
               src={postImageUrl}
               alt={post.title}
-              className="rounded-xl shadow-md"
-              width="700"
-
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              className="rounded-xl shadow-md w-full"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.25, delay: 0.05 }}
             />
           )}
-        </div>
-        <div className="col-span-6 md:col-span-6 p-2">
+        </motion.div>
+        <motion.div 
+          className="p-2"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut", delay: 0.05 }}
+        >
           <motion.div 
-            className="float-right">
+            className="mb-4"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
             {post.tags && (
               post.tags.map((tag: SanityDocument, index: number) => (
                 <div className="inline-block p-1" key={`tag-${index}`}>
@@ -57,41 +72,37 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
             )}
           </motion.div>
 
-          <h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
+          >
             {job?.title && (
-                <motion.span
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-                className="block font-primary text-2xl font-bold">
+                <span className="block font-primary text-2xl font-bold">
                   {job.title}
-                </motion.span>
-
+                </span>
             )}
-            <motion.span
-              initial={{ x: -10, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.1 }}
-              className="inline-block font-primary text-4xl font-bold mb-5"
-            >
+            <span className="inline-block font-primary text-4xl font-bold mb-5">
               {post.title}
-            </motion.span>
-          </h1>
+            </span>
+          </motion.h1>
           <motion.div 
             key={`${'div-body'}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }} className="prose ">
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }} 
+            className="prose"
+          >
             {Array.isArray(post.body) && <PortableText value={post.body} />}
-
           </motion.div>
 
           {postGalleryUrls && postGalleryUrls.length > 0 && (
             <motion.div 
               key={`${'div-gallery'}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}>
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.4 }}
+            >
               <h2 className="text-xl font-semibold  mt-5 mb-5">Gallery</h2>
               <Gallery images={postGalleryUrls} />
             </motion.div>
@@ -100,15 +111,16 @@ const Project = ({ post, job, jobPosts }: { post: SanityDocument, job: SanityDoc
           {job && jobPosts && jobPosts.length > 0 && (
             <motion.div 
               key={`${'div-job'}`} 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}>
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+            >
               <h2 className="text-xl font-semibold  mt-5 mb-2">More from {job.title}...</h2>
               <CategoryScroller title={`From ${job.title} (${job.year})`} items={jobPosts} />
             </motion.div>
           )}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       
     </>

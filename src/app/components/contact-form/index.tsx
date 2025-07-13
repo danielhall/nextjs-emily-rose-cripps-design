@@ -1,10 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import Image from 'next/image';
-
-import Stamp from '../../assets/img/stamp.png';
+import { motion } from 'framer-motion';
 
 interface FormData {
   name: string;
@@ -15,28 +12,19 @@ interface FormData {
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<string | null>(null);
-  const [stampAffixed, setStampAffixed] = useState(false);
-  const [showStamp, setShowStamp] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleStampClick = () => {
-    setShowStamp(true);
-    setTimeout(() => setStampAffixed(true), 700);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!stampAffixed) {
-      setStatus('Please affix the stamp before sending.');
-      return;
-    }
+    setIsSubmitting(true);
 
     try {
-      setStatus('Sending...');
+      setStatus('Sending message...');
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -46,101 +34,108 @@ const ContactForm: React.FC = () => {
       });
 
       if (response.ok) {
-        setStatus('Message sent!');
+        setStatus('Thank you! Your message has been sent successfully.');
         setFormData({ name: '', email: '', message: '' });
-        setStampAffixed(false);
-        setShowStamp(false);
       } else {
-        setStatus('Error sending message. Please try again.');
+        setStatus('Sorry, there was an error sending your message. Please try again.');
       }
     } catch (error) {
-      setStatus('Error sending message. Please try again.');
+      setStatus('Sorry, there was an error sending your message. Please try again.');
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="relative max-w-[1200px] w-full mx-auto bg-postcard bg-contain bg-no-repeat h-[750px]">
-      <div className="absolute top-[60px] right-[75px] w-100 h-110 cursor-pointer">
-        {!stampAffixed && (
-          <div onClick={handleStampClick} className="absolute top-0 right-0 z-10">
-            <motion.div
-              initial={{ rotate: -20, y: -30, opacity: 0.8 }}
-              animate={{ rotate: 0, y: 0, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              className="block h-[110px] w-[100px]"
-            >
-            </motion.div>
-          </div>
-        )}
-
-        <AnimatePresence>
-          {showStamp && (
-            <motion.div
-              key="stamp"
-              initial={{ rotateX: -120, rotateZ: -15, scale: 1.2, y: -20, opacity: 0 }}
-              animate={{ rotateX: 0, rotateZ: 0, scale: 1, y: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: [0.65, -0.25, 0.35, 1.25] }}
-              className="absolute h-[100px] w-[110px] top-[-5px] right-[-5px] origin-top-right z-20"
-            >
-              <Image src={Stamp.src} alt="Stamp Affixed" width={110} height={100} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-[330px] pl-[50px] pr-[60px]">
-        <div className="p-2">
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full h-full min-h-[200px] p-3 bg-[#AAA] bg-opacity-20 focus:bg-opacity-0 focus:outline-none text-black placeholder-black"
-            rows={10}
-            placeholder="Write your message here..."
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-6">
-          <div className="p-2">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full max-w-2xl mx-auto"
+    >
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              Your Name
+            </label>
             <input
               id="name"
               name="name"
               type="text"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 bg-[#AAA] bg-opacity-20 focus:bg-opacity-0 focus:outline-none text-black placeholder-black"
-              placeholder="Leave your full name..."
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-black focus:outline-none transition-colors duration-300"
+              placeholder="Enter your full name"
               required
             />
           </div>
 
-          <div className="p-2">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              Email Address
+            </label>
             <input
               id="email"
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 bg-[#AAA] bg-opacity-20 focus:bg-opacity-0 focus:outline-none text-black placeholder-black"
-              placeholder="And your email address..."
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-black focus:outline-none transition-colors duration-300"
+              placeholder="Enter your email address"
               required
             />
           </div>
-
-          <button
-            type="submit"
-            className="mt-auto bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            Send Postcard
-          </button>
         </div>
-      </form>
 
-      {status && <p className="text-center text-sm mt-4 text-gray-600">{status}</p>}
-    </div>
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+            Your Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-black focus:outline-none transition-colors duration-300 resize-vertical"
+            rows={6}
+            placeholder="Tell me about your project or ask any questions..."
+            required
+          />
+        </div>
+
+        <motion.button
+          type="submit"
+          disabled={isSubmitting}
+          whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+          whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+          className={`w-full py-4 rounded-lg font-medium transition-colors duration-300 ${
+            isSubmitting
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-black hover:bg-gray-800 text-white'
+          }`}
+        >
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </motion.button>
+
+        {status && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`text-center p-4 rounded-lg ${
+              status.includes('Thank you')
+                ? 'bg-green-50 text-green-800 border border-green-200'
+                : status.includes('error') || status.includes('Sorry')
+                ? 'bg-red-50 text-red-800 border border-red-200'
+                : 'bg-blue-50 text-blue-800 border border-blue-200'
+            }`}
+          >
+            {status}
+          </motion.div>
+        )}
+      </form>
+    </motion.div>
   );
 };
 

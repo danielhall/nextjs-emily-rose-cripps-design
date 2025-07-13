@@ -21,32 +21,36 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   
     return (
       <div>
-        <div className="grid grid-cols-12 gap-1 mb-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {images.map((image, index) => (
-                <div key={index} className="col-span-3 md:col-span-3 pt-2 p-1">
-                    <motion.div 
-                        whileHover={{
-                            scale: 1.04,
-                            transition: { duration: 0.2 },
-                        }}
-                        whileTap={{ scale: 1 }}
-                        className="h-40 overflow-hidden rounded-md shadow-md relative group cursor-pointer">
-                        <img
-                            src={image}
-                            alt={`Thumbnail ${index + 1}`}
-                            style={{ cursor: "pointer" }}
-                            className={"w-full h-full object-cover"}
-                            onClick={() => openLightbox(index)}
-                        />
-                        <span 
-                            className="pointer-events-none absolute top-1 right-1 p-2  font-semibold rounded-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            View
-                            <EnterFullScreenIcon className="inline-block ml-1 mb-1"/>
-                        </span>
-                    </motion.div>
+                <motion.div 
+                    key={index}
+                    whileHover={{
+                        scale: 1.02,
+                        transition: { duration: 0.3 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="relative overflow-hidden rounded-lg border-2 border-black aspect-square group cursor-pointer bg-white"
+                    onClick={() => openLightbox(index)}
+                >
+                    <img
+                        src={image}
+                        alt={`Gallery image ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
                     
-                </div>
+                    {/* View overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-black/80 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium">
+                            <EnterFullScreenIcon className="w-4 h-4" />
+                            View
+                        </div>
+                    </div>
+                </motion.div>
             ))}
         </div>
         {isLightboxOpen && (

@@ -8,6 +8,24 @@ import { type SanityDocument } from "next-sanity";
 import Introduction from "../introduction";
 import GridLayout from "../grid-layout";
 
+// Helper function to convert PortableText to plain text
+function portableTextToPlainText(blocks: unknown[]): string {
+  if (!blocks || !Array.isArray(blocks)) return '';
+  
+  return blocks
+    .filter((block) => block && typeof block === 'object' && '_type' in block && block._type === 'block')
+    .map((block) => {
+      if (block && typeof block === 'object' && 'children' in block && Array.isArray(block.children)) {
+        return block.children
+          .filter((child) => child && typeof child === 'object' && '_type' in child && child._type === 'span')
+          .map((child) => child && typeof child === 'object' && 'text' in child ? child.text : '')
+          .join('');
+      }
+      return '';
+    })
+    .join(' ');
+}
+
 interface HomepageProps {
   featuredPosts: Array<{
     id: string;
@@ -37,8 +55,10 @@ export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: Home
                 <h1 className="font-primary text-4xl md:text-5xl font-bold mt-2 mb-4">
                   {heroPost.title}
                 </h1>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  {heroPost.description}
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed md:pr-6">
+                  {heroPost.featuredBody 
+                    ? portableTextToPlainText(heroPost.featuredBody)
+                    : heroPost.description}
                 </p>
                 <Link 
                   href={`/${heroPost.slug.current}`}

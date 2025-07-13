@@ -52,3 +52,37 @@ body {
   border-color:#000000;
 }
  */
+
+/* Custom scrollbar styles for category scroller */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.hover\:scrollbar-show:hover {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 #f3f4f6;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-thumb:hover {
+  background: #1f2937;
+}

@@ -35,7 +35,7 @@ const GridLayout: React.FC<GridLayoutProps> = ({
                         onClick={() => router.push(`/${post.url}`)}
                     >
                         {/* Image Container */}
-                        <div className="relative overflow-hidden border border-double border-black border-[3px] aspect-square mb-3">
+                        <div className="relative overflow-hidden rounded-lg border-2 border-black aspect-square mb-3">
                             <motion.img
                                 whileHover={{
                                     scale: 1.05,
@@ -48,14 +48,14 @@ const GridLayout: React.FC<GridLayoutProps> = ({
                                 layoutId={post.id}
                             />
                             
-                            {/* Overlay with "See work" text */}
+                            {/* Overlay with "See graphic" text */}
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300">
                                 <div className="absolute bottom-0 left-0 right-0 p-3 
                                     transform translate-y-full group-hover:translate-y-0 
                                     transition-transform duration-300 ease-out
                                     bg-gradient-to-t from-black/80 to-transparent">
                                     <span className="text-white font-semibold text-sm md:text-base flex items-center justify-center">
-                                        See work
+                                        See graphic
                                         <ArrowRightIcon className="ml-2 w-4 h-4" />
                                     </span>
                                 </div>

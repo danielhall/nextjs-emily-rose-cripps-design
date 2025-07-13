@@ -7,17 +7,37 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 import Homepage from "../components/homepage";
 
+// Helper function to convert PortableText to plain text
+function portableTextToPlainText(blocks: unknown[]): string {
+  if (!blocks || !Array.isArray(blocks)) return '';
+  
+  return blocks
+    .filter((block) => block && typeof block === 'object' && '_type' in block && block._type === 'block')
+    .map((block) => {
+      if (block && typeof block === 'object' && 'children' in block && Array.isArray(block.children)) {
+        return block.children
+          .filter((child) => child && typeof child === 'object' && '_type' in child && child._type === 'span')
+          .map((child) => child && typeof child === 'object' && 'text' in child ? child.text : '')
+          .join('');
+      }
+      return '';
+    })
+    .join(' ');
+}
+
 // Query for featured/recent work
 const FEATURED_POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...6]{_id, title, slug, image, publishedAt, description}`;
+  && isFeatured == true
+]|order(publishedAt desc)[0...6]{_id, title, slug, image, publishedAt, description, featuredBody, isFeatured}`;
 
 // Query for a hero/featured project
 const HERO_POST_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0]{_id, title, slug, image, description, body}`;
+  && isHeroFeatured == true
+]|order(publishedAt desc)[0]{_id, title, slug, image, description, featuredBody, body, isHeroFeatured}`;
 
 const options = createCacheOptions(CACHE_DURATIONS.PORTFOLIO, [CACHE_TAGS.POSTS, CACHE_TAGS.PORTFOLIO]);
 
@@ -38,7 +58,9 @@ export default async function IndexPage() {
     name: post.title,
     image: urlFor(post.image)?.width(500).url()?.toString() || "",
     url: post.slug.current,
-    description: post.description || ""
+    description: post.featuredBody 
+      ? portableTextToPlainText(post.featuredBody)
+      : post.description || ""
   }));
 
   const heroImageUrl = heroPost?.image 

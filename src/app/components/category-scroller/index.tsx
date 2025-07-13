@@ -37,58 +37,66 @@ const CategoryScroller: React.FC<CategoryScrollerProps> = ({ items }) => {
   return (
     <div className="space-y-4">
       {/* Group Row */}
-      <div className="relative">
+      <div className="relative group">
         {/* Scroll Buttons */}
         <button
           onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50  p-2 rounded-full hidden group-row:hover:block"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+          aria-label="Scroll left"
         >
-          <FaChevronLeft size={20} />
+          <FaChevronLeft size={16} />
         </button>
         <button
           onClick={() => scroll('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-50  p-2 rounded-full hidden group-row:hover:block"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/70 hover:bg-black/90 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+          aria-label="Scroll right"
         >
-          <FaChevronRight size={20} />
+          <FaChevronRight size={16} />
         </button>
 
         {/* Scrollable Thumbnails */}
         <motion.div
           ref={scrollRef}
-          className="flex overflow-x-auto space-x-3 snap-x snap-mandatory scrollbar-hide p-0 sm:p-3"
+          className="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide p-4 hover:scrollbar-show"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#374151 #f3f4f6'
+          }}
         >
-          {items.map((item) => (
-            // Group Image now correctly scoped
+          {items.map((item, index) => (
             <motion.div
               key={item._id}
-              className="flex-none w-48 h-48  flex items-center justify-center snap-start group relative"
+              className="flex-none w-64 snap-start group/card relative cursor-pointer"
               whileHover={{
-                scale: 1.04,
+                scale: 1.02,
                 transition: { duration: 0.3 },
               }}
-              whileTap={{ scale: 1 }}
-              initial={{ opacity: 0, x: -50 }}
+              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0}}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: index * 0.1 }}
               onClick={() => router.push(`/${item.slug.current}`)}
             >
-              {item.image && (
-
-                <motion.img
-                  src={`${urlFor(item.image)?.width(400).url() || ''}`}
-                  alt={`${item.title}`}
-                  className="w-full h-full object-cover rounded-md shadow-md cursor-pointer bg-black"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                />
-              )}
-              <span 
-                className="pointer-events-none absolute bottom-0 left-0 p-2 font-semibold rounded-b-md bg-background-50/90 backdrop-blur-sm backdrop-brightness-50
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full">
-                {item.title}
-              </span>
+              <div className="relative overflow-hidden rounded-lg border-2 border-black aspect-[4/3] bg-white">
+                {item.image && (
+                  <motion.img
+                    src={`${urlFor(item.image)?.width(400).url() || ''}`}
+                    alt={`${item.title}`}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/10 transition-all duration-300" />
+                
+                {/* Title overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                  <h3 className="font-medium text-white text-sm leading-tight">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>

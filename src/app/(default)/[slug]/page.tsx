@@ -52,20 +52,23 @@ export default async function PostPage(params: {
 
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
 
-  const jobPostParams = {
-    params: {
-      jobId: post.job._id,
-      currentPostId: post._id
-    }
-  };
-
-  const jobPosts = await client.fetch<SanityDocument[]>(JOB_POSTS_QUERY, jobPostParams, options);
-
   if (!post) {
     return (
       <main className="container mx-auto min-h-screen max-w-5xl p-12 flex flex-col gap-4">
         <span>We couldn&apos;t find that</span>
       </main>);
+  }
+
+  // Only fetch related job posts if the post has an associated job
+  let jobPosts: SanityDocument[] = [];
+  if (post.job && post.job._id) {
+    const jobPostParams = {
+      params: {
+        jobId: post.job._id,
+        currentPostId: post._id
+      }
+    };
+    jobPosts = await client.fetch<SanityDocument[]>(JOB_POSTS_QUERY, jobPostParams, options);
   }
 
   return (
