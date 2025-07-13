@@ -3,7 +3,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-import MasonryLayout from "../../components/masonry-layout";
+import GridLayout from "../../components/grid-layout";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -26,11 +26,9 @@ export default async function IndexPage() {
       : [];
 
   return (
-    <div
-      >
-      <MasonryLayout 
+    <div>
+      <GridLayout 
           posts={masonryPosts} 
-          breakpoints={{ 480: 1, 768: 2, 1024: 4 }} 
       />
     </div>
   );

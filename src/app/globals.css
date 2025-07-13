@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,10 +20,9 @@ html {
 
 body {
   color: var(--foreground);
-  font-family: "Goudy Bookletter 1911", serif;
 }
 
-.nav-item {
+/* .nav-item {
   font-size:15px;
   line-height: 20px;
   display: inline-block;
@@ -55,4 +52,4 @@ body {
 .nav-item-mob--selected {
   margin: 10px 10px 10px 10px;
   border-color:#000000;
-}
+} */

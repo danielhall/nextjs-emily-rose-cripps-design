@@ -79,7 +79,7 @@ export default function Productions({ posts }: Props) {
                 <motion.img
                   src={category.landscapePoster}
                   alt={category.title}
-                  className="w-full h-full object-cover object-center blur-md"
+                  className="w-full h-full object-cover object-center blur-xl"
                 />
                 <div className="absolute inset-0 z-10 flex flex-col sm:flex-row p-4 text-white bg-black/50">
                 {/* top row container (portrait + text) */}

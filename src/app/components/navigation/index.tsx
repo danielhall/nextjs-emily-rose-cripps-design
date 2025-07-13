@@ -9,8 +9,8 @@ function Navbar() {
   const pathname = usePathname();
 
   return (
-    <>
-        <ul className="hidden md:flex gap-x-6 font-semibold">
+    <div className="inline-block ml-20 font-semibold text-xl">
+        <ul className="hidden md:flex gap-x-12 ">
             <li>
             <Link 
                 key="nav-1"
@@ -44,13 +44,8 @@ function Navbar() {
                 <span>Contact</span>
             </Link>
             </li>
-            <li>
-            <Link key="nav-3" href="https://www.instagram.com/emilyrcrippsdesign/" target="_blank">
-                <span><InstagramLogoIcon className="inline-block mb-1"/></span>
-            </Link>
-            </li>
         </ul>
-    </>
+    </div>
   );
 };
 

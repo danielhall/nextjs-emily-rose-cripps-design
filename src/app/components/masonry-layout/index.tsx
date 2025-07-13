@@ -45,7 +45,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
         const handleResize = () => setColumns(getColumns(window.innerWidth));
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [breakpoints]);
+    }, [breakpoints, getColumns]);
 
     // Prepare columns as empty arrays
     const columnArrays: MasonryItem[][] = Array.from({ length: columns }, () => []);
@@ -85,7 +85,7 @@ const MasonryLayout: React.FC<MasonryProps> = ({ posts, breakpoints = { 768: 2, 
                                     layoutId={`${post.id}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0, duration: 1 }}
+                                    exit={{ opacity: 0 }}
                                     transition={{ duration: 0.2 }}
                                     
                                 />

@@ -27,7 +27,7 @@ export default {
       },
       fontFamily: {
         primary: ["'Patrick Hand SC'", "cursive"],
-        secondary: ["Vidaloka", "serif"],
+        secondary: ["'Patrick Hand SC'", "cursive"],
         handsome: ["handsome-pro", "sans-serif"]
       },
       backgroundImage: {

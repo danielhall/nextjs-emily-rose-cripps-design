@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
+import Navigation from "./components/navigation";
 
 const TAG_QUERY = `
   *[
@@ -49,7 +50,11 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/ogv2gni.css" />
       </head>
       <body>
-        <p className="ml-[46] mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
+        <div className="inline-block">
+          <p className="ml-[46] mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
+        </div>
+        
+        <Navigation />
 
         <AnimationWrapper>
           <main className="container mx-auto pl-6 pr-4 sm:p-0">
