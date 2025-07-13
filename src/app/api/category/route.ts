@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
       image,
       publishedAt,
       description,
-      _updatedAt
+      _updatedAt,
+      job->{title}
     }`;
 
     const COUNT_QUERY = `count(*[
@@ -52,8 +53,9 @@ export async function GET(request: NextRequest) {
           name: i.title, 
           image: urlFor(i.image)?.width(500).url()?.toString(), 
           url: i.slug.current,
-          description: i.description
-        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
+          description: i.description,
+          jobTitle: i.job?.title || null
+        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string, jobTitle: string | null } => !!item)
       : [];
 
     const hasMore = offset + posts.length < totalCount;

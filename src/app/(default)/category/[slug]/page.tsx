@@ -16,7 +16,8 @@ const POSTS_QUERY = `
     image,
     publishedAt,
     description,
-    _updatedAt
+    _updatedAt,
+    job->{title}
   }
 `;
 
@@ -62,8 +63,9 @@ export default async function CategoryPage(params: {
           name: i.title, 
           image: urlFor(i.image)?.width(500).url().toString(), 
           url: i.slug.current,
-          description: i.description
-        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
+          description: i.description,
+          jobTitle: i.job?.title || null
+        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string, jobTitle: string | null } => !!item)
       : [];
 
   return <CategoryPageClient posts={masonryPosts} tag={tag[0]} totalCount={totalCount} />;

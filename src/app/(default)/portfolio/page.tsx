@@ -7,11 +7,13 @@ import PortfolioPageClient from "./page-client";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(_updatedAt desc, publishedAt desc)[0...20]{_id, title, slug, image, publishedAt, description, _updatedAt}`;
+  && hideFromPortfolioIndex != true
+]|order(_updatedAt desc, publishedAt desc)[0...20]{_id, title, slug, image, publishedAt, description, _updatedAt, job->{title}}`;
 
 const COUNT_QUERY = `count(*[
   _type == "post"
   && defined(slug.current)
+  && hideFromPortfolioIndex != true
 ])`;
 
 const options = createCacheOptions(CACHE_DURATIONS.PORTFOLIO, [CACHE_TAGS.POSTS, CACHE_TAGS.PORTFOLIO]);
@@ -34,8 +36,9 @@ export default async function IndexPage() {
           name: i.title, 
           image: urlFor(i.image)?.width(500).url()?.toString(), 
           url: i.slug.current,
-          description: i.description
-        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
+          description: i.description,
+          jobTitle: i.job?.title || null
+        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string, jobTitle: string | null } => !!item)
       : [];
 
   return <PortfolioPageClient posts={masonryPosts} totalCount={totalCount} />;

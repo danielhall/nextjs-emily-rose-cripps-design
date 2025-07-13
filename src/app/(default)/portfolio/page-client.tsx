@@ -10,6 +10,7 @@ interface Post {
   image: string;
   url: string;
   description: string;
+  jobTitle: string | null;
 }
 
 interface Props {

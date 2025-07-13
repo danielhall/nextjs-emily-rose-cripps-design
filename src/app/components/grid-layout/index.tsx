@@ -11,6 +11,7 @@ type GridItem = {
     image: string;
     url: string;
     description: string;
+    jobTitle?: string | null;
 }
 
 interface GridLayoutProps {
@@ -63,8 +64,13 @@ const GridLayout: React.FC<GridLayoutProps> = ({
                         </div>
 
                         {/* Title and Description */}
-                        <div className="space-y-2">
-                            <h3 className="font-semibold text-sm md:text-base leading-tight overflow-hidden" 
+                        <div className={post.jobTitle ? "space-y-1" : "space-y-2"}>
+                            {post.jobTitle && (
+                                <p className="text-xs md:text-sm text-gray-600 font-medium uppercase tracking-wide">
+                                    {post.jobTitle}
+                                </p>
+                            )}
+                            <h3 className="font-semibold text-sm md:text-base leading-tight overflow-hidden"
                                 style={{ 
                                     display: '-webkit-box',
                                     WebkitLineClamp: 2,

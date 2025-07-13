@@ -11,6 +11,7 @@ interface Post {
   image: string;
   url: string;
   description: string;
+  jobTitle: string | null;
 }
 
 interface Props {
@@ -68,7 +69,7 @@ export default function CategoryPageClient({ posts: initialPosts, tag, totalCoun
             {tag.title}
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Discover my creative work within the {tag.title.toLowerCase()} category.
+            Discover my creative work within {tag.title}.
           </p>
         </motion.div>
 
