@@ -9,13 +9,14 @@ const POSTS_QUERY = `
     _type == "post" 
     && defined(slug.current) 
     && $params.slug in tags[]->slug.current
-  ] | order(publishedAt desc)[0...18] {
+  ] | order(_updatedAt desc, publishedAt desc)[0...20] {
     _id,
     title,
     slug,
     image,
     publishedAt,
-    description
+    description,
+    _updatedAt
   }
 `;
 
@@ -31,6 +32,14 @@ const TAG_QUERY = `
   }
 `;
 
+const COUNT_QUERY = `
+  count(*[
+    _type == "post" 
+    && defined(slug.current) 
+    && $params.slug in tags[]->slug.current
+  ])
+`;
+
 const options = createCacheOptions(CACHE_DURATIONS.CATEGORIES, [CACHE_TAGS.POSTS, CACHE_TAGS.CATEGORIES, CACHE_TAGS.TAGS]);
 
 const { projectId, dataset } = client.config();
@@ -41,8 +50,11 @@ const urlFor = (source: SanityImageSource) =>
 
 export default async function CategoryPage(params: { 
   params: Promise<{ slug: string }>}) {
-  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, params, options);
-  const tag = await client.fetch<SanityDocument[]>(TAG_QUERY, params, options);
+  const [posts, tag, totalCount] = await Promise.all([
+    client.fetch<SanityDocument[]>(POSTS_QUERY, params, options),
+    client.fetch<SanityDocument[]>(TAG_QUERY, params, options),
+    client.fetch<number>(COUNT_QUERY, params, options)
+  ]);
 
   const masonryPosts = posts
       ? posts.map((i: SanityDocument) => (i ? { 
@@ -54,5 +66,5 @@ export default async function CategoryPage(params: {
         } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
-  return <CategoryPageClient posts={masonryPosts} tag={tag[0]} />;
+  return <CategoryPageClient posts={masonryPosts} tag={tag[0]} totalCount={totalCount} />;
 }

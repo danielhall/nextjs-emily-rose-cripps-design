@@ -7,7 +7,12 @@ import PortfolioPageClient from "./page-client";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt, description}`;
+]|order(_updatedAt desc, publishedAt desc)[0...20]{_id, title, slug, image, publishedAt, description, _updatedAt}`;
+
+const COUNT_QUERY = `count(*[
+  _type == "post"
+  && defined(slug.current)
+])`;
 
 const options = createCacheOptions(CACHE_DURATIONS.PORTFOLIO, [CACHE_TAGS.POSTS, CACHE_TAGS.PORTFOLIO]);
 
@@ -18,17 +23,20 @@ const urlFor = (source: SanityImageSource) =>
     : null;
 
 export default async function IndexPage() {
-  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+  const [posts, totalCount] = await Promise.all([
+    client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options),
+    client.fetch<number>(COUNT_QUERY, {}, options)
+  ]);
 
   const masonryPosts = posts
       ? posts.map((i: SanityDocument) => (i ? { 
           id: i._id, 
           name: i.title, 
-          image: urlFor(i.image)?.width(500).url().toString(), 
+          image: urlFor(i.image)?.width(500).url()?.toString(), 
           url: i.slug.current,
           description: i.description
         } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
-  return <PortfolioPageClient posts={masonryPosts} />;
+  return <PortfolioPageClient posts={masonryPosts} totalCount={totalCount} />;
 }
