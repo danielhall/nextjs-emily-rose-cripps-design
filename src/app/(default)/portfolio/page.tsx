@@ -2,8 +2,7 @@ import { type SanityDocument } from "next-sanity";
 import { client, CACHE_DURATIONS, CACHE_TAGS, createCacheOptions } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-import GridLayout from "../../components/grid-layout";
+import PortfolioPageClient from "./page-client";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -31,13 +30,5 @@ export default async function IndexPage() {
         } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
-  return (
-    <div>
-      <small className="text-gray-600 ml-4 md:ml-0">Explore my</small>
-      <h1 className="font-primary text-3xl font-semibold mb-8 ml-4 md:ml-0">Portfolio</h1>
-      <GridLayout 
-          posts={masonryPosts} 
-      />
-    </div>
-  );
+  return <PortfolioPageClient posts={masonryPosts} />;
 }

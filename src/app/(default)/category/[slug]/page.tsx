@@ -2,8 +2,7 @@ import { type SanityDocument } from "next-sanity";
 import { client, CACHE_DURATIONS, CACHE_TAGS, createCacheOptions } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-import GridLayout from "../../../components/grid-layout";
+import CategoryPageClient from "./page-client";
 
 const POSTS_QUERY = `
   *[
@@ -55,13 +54,5 @@ export default async function CategoryPage(params: {
         } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
-  return (
-    <>
-      <small className="text-gray-600 ml-4 md:ml-0">Works tagged with</small>
-      <h1 className="font-primary text-3xl font-semibold mb-8 ml-4 md:ml-0">{tag[0].title}</h1>
-      <GridLayout 
-          posts={masonryPosts} 
-      />
-    </>
-  );
+  return <CategoryPageClient posts={masonryPosts} tag={tag[0]} />;
 }

@@ -15,7 +15,7 @@ const TAG_QUERY = `
     _type == "tag"
     && defined(slug.current)
     && defined(title) 
-  ]|order(publishedAt desc){_id, title, color { hex }, slug}
+  ]|order(publishedAt desc){_id, title, color { hex }, slug, displayInMenu}
 `;
 
 const tagOptions = createCacheOptions(CACHE_DURATIONS.TAGS, [CACHE_TAGS.TAGS, CACHE_TAGS.NAVIGATION]);

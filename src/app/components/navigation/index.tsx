@@ -13,6 +13,9 @@ function Navigation({ tags, section = "full" }: { tags: SanityDocument[], sectio
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
 
+  // Filter tags to only show those with displayInMenu: true
+  const menuTags = tags.filter(tag => tag.displayInMenu === true);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -64,7 +67,7 @@ function Navigation({ tags, section = "full" }: { tags: SanityDocument[], sectio
               
               <DropdownMenu.Separator className="h-px bg-gray-200 my-1" />
               
-              {tags.map((tag) => (
+              {menuTags.map((tag) => (
                 <DropdownMenu.Item key={tag._id} asChild>
                   <Link 
                     href={`/category/${tag.slug.current}`}
@@ -243,7 +246,7 @@ function Navigation({ tags, section = "full" }: { tags: SanityDocument[], sectio
                                 </Link>
                                 
                                 <div className="border-t border-gray-200 pt-2">
-                                  {tags.map((tag) => (
+                                  {menuTags.map((tag) => (
                                     <Link
                                       key={tag._id}
                                       href={`/category/${tag.slug.current}`}
@@ -345,7 +348,7 @@ function Navigation({ tags, section = "full" }: { tags: SanityDocument[], sectio
                   
                   <DropdownMenu.Separator className="h-px bg-gray-200 my-1" />
                   
-                  {tags.map((tag) => (
+                  {menuTags.map((tag) => (
                     <DropdownMenu.Item key={tag._id} asChild>
                       <Link 
                         href={`/category/${tag.slug.current}`}
@@ -491,7 +494,7 @@ function Navigation({ tags, section = "full" }: { tags: SanityDocument[], sectio
                                 </Link>
                                 
                                 <div className="border-t border-gray-200 pt-2">
-                                  {tags.map((tag) => (
+                                  {menuTags.map((tag) => (
                                     <Link
                                       key={tag._id}
                                       href={`/category/${tag.slug.current}`}

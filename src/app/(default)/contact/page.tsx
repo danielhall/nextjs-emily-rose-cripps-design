@@ -13,7 +13,7 @@ export default function ContactPage() {
         className="space-y-12"
       >
         {/* Header Section */}
-        <section className="text-center py-12">
+        <section className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
