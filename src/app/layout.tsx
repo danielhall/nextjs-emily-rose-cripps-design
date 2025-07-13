@@ -50,14 +50,16 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/ogv2gni.css" />
       </head>
       <body>
-        <div className="inline-block">
-          <p className="ml-[46] mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
-        </div>
-        
-        <Navigation />
 
+        <header className="container mx-auto sm:p-0 mb-20">
+          <div className="inline-block">
+            <p className="ml-2 mt-10 text-4xl text-primary font-bold font-handsome">Emily-Rose Cripps</p>
+          </div>
+          <Navigation />
+        </header>
+        
         <AnimationWrapper>
-          <main className="container mx-auto pl-6 pr-4 sm:p-0">
+          <main className="container mx-auto sm:p-0">
             <div className="mt-6">
               {children}
             </div>

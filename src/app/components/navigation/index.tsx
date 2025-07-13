@@ -25,6 +25,17 @@ function Navbar() {
             <li>
             <Link 
                 key="nav-2"
+                className={pathname == "/portfolio" ? 
+                    "nav-item nav-item--selected" : 
+                    "nav-item"
+                }
+                href="/portfolio">
+                <span>Portfolio</span>
+            </Link>
+            </li>
+            <li>
+            <Link 
+                key="nav-3"
                 className={pathname == "/productions" ? 
                     "nav-item nav-item--selected" : 
                     "nav-item"
@@ -35,7 +46,7 @@ function Navbar() {
             </li>
             <li>
             <Link 
-                key="nav-3"
+                key="nav-4"
                 className={pathname == "/contact" ? 
                     "nav-item nav-item--selected" : 
                     "nav-item"

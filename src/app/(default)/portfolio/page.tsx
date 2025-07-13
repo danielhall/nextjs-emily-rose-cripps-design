@@ -8,7 +8,7 @@ import GridLayout from "../../components/grid-layout";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt}`;
+]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt, description}`;
 
 const options = { next: { revalidate: 120 } };
 
@@ -22,7 +22,13 @@ export default async function IndexPage() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
   const masonryPosts = posts
-      ? posts.map((i: SanityDocument) => (i ? { id: i._id, name: i.title, image: urlFor(i.image)?.width(700).url().toString(), url: i.slug.current } : null)).filter((item): item is { id: string, name: string, image: string, url: string } => !!item)
+      ? posts.map((i: SanityDocument) => (i ? { 
+          id: i._id, 
+          name: i.title, 
+          image: urlFor(i.image)?.width(500).url().toString(), 
+          url: i.slug.current,
+          description: i.description
+        } : null)).filter((item): item is { id: string, name: string, image: string, url: string, description: string } => !!item)
       : [];
 
   return (
