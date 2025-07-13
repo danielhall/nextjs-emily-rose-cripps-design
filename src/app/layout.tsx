@@ -9,7 +9,7 @@ import Header from "./components/header"
 import Footer from "./components/footer";
 
 import { type SanityDocument } from "next-sanity";
-import { client } from "@/sanity/client";
+import { client, CACHE_DURATIONS, CACHE_TAGS, createCacheOptions } from "@/sanity/client";
 
 const TAG_QUERY = `
   *[
@@ -18,6 +18,8 @@ const TAG_QUERY = `
     && defined(title) 
   ]|order(publishedAt desc){_id, title, color { hex }, slug}
 `;
+
+const tagOptions = createCacheOptions(CACHE_DURATIONS.TAGS, [CACHE_TAGS.TAGS, CACHE_TAGS.NAVIGATION]);
 
 export const metadata: Metadata = {
   title: "Emily-Rose Cripps Design",
@@ -29,7 +31,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const tags = await client.fetch<SanityDocument[]>(TAG_QUERY);
+  const tags = await client.fetch<SanityDocument[]>(TAG_QUERY, {}, tagOptions);
 
   return (
     <html lang="en" className={`bg-white antialiased font-primary select-none`}>

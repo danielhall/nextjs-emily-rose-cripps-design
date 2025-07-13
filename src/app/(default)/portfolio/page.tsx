@@ -1,5 +1,5 @@
 import { type SanityDocument } from "next-sanity";
-import { client } from "@/sanity/client";
+import { client, CACHE_DURATIONS, CACHE_TAGS, createCacheOptions } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
@@ -10,7 +10,7 @@ const POSTS_QUERY = `*[
   && defined(slug.current)
 ]|order(publishedAt desc)[0...18]{_id, title, slug, image, publishedAt, description}`;
 
-const options = { next: { revalidate: 120 } };
+const options = createCacheOptions(CACHE_DURATIONS.PORTFOLIO, [CACHE_TAGS.POSTS, CACHE_TAGS.PORTFOLIO]);
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>

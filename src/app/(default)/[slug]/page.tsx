@@ -1,5 +1,5 @@
 import { type SanityDocument } from "next-sanity";
-import { client } from "@/sanity/client";
+import { client, CACHE_DURATIONS, CACHE_TAGS, createCacheOptions } from "@/sanity/client";
 
 import Project from "../../components/project-detail"
 
@@ -45,7 +45,7 @@ const JOB_POSTS_QUERY = `
   }
 `;
 
-const options = { next: { revalidate: 30 } };
+const options = createCacheOptions(CACHE_DURATIONS.POSTS, [CACHE_TAGS.POSTS]);
 
 export default async function PostPage(params: { 
   params: Promise<{ slug: string }>}) {
