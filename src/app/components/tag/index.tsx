@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { type SanityDocument } from 'next-sanity';
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { IoPricetagOutline } from "react-icons/io5";
 

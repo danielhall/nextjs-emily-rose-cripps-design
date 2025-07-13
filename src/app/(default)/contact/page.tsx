@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnimationControls } from 'framer-motion';
+import { useAnimationControls } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { type SanityDocument } from "next-sanity";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import imageUrlBuilder from "@sanity/image-url";

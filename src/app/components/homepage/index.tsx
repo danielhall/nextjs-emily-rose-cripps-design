@@ -1,0 +1,141 @@
+'use client';
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { type SanityDocument } from "next-sanity";
+
+import Introduction from "../introduction";
+import GridLayout from "../grid-layout";
+
+interface HomepageProps {
+  featuredPosts: Array<{
+    id: string;
+    name: string;
+    image: string;
+    url: string;
+    description: string;
+  }>;
+  heroPost: SanityDocument;
+  heroImageUrl: string | null;
+}
+
+export default function Homepage({ featuredPosts, heroPost, heroImageUrl }: HomepageProps) {
+  return (
+    <div className="mx-auto px-4 space-y-16">
+      {/* Hero Section with Featured Work */}
+      {heroPost && (
+        <section className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="order-2 lg:order-1">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <span className="text-sm text-gray-600 uppercase tracking-wide">Featured Work</span>
+                <h1 className="font-primary text-4xl md:text-5xl font-bold mt-2 mb-4">
+                  {heroPost.title}
+                </h1>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  {heroPost.description || "Explore my latest design work showcasing creativity and attention to detail in film and television graphics."}
+                </p>
+                <Link 
+                  href={`/${heroPost.slug.current}`}
+                  className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                >
+                  View Project
+                  <ArrowRightIcon className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            </div>
+            
+            <div className="order-1 lg:order-2">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative"
+              >
+                {heroImageUrl && (
+                  <Link href={`/${heroPost.slug.current}`}>
+                    <div className="relative overflow-hidden rounded-lg border-2 border-black aspect-[4/3] group cursor-pointer">
+                      <motion.img
+                        src={heroImageUrl}
+                        alt={heroPost.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
+                    </div>
+                  </Link>
+                )}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Introduction Section */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="bg-gray-50 rounded-lg p-8"
+        >
+          <Introduction />
+        </motion.div>
+      </section>
+
+      {/* Recent Work Section */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <span className="text-sm text-gray-600 uppercase tracking-wide">Latest Projects</span>
+              <h2 className="font-primary text-3xl font-bold mt-2">Recent Work</h2>
+            </div>
+            <Link 
+              href="/portfolio"
+              className="inline-flex items-center gap-2 text-black hover:text-gray-600 transition-colors font-medium"
+            >
+              View All Work
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          <GridLayout posts={featuredPosts} />
+        </motion.div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="text-center py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="bg-black text-white rounded-lg p-8"
+        >
+          <h2 className="font-primary text-2xl md:text-3xl font-bold mb-4">
+            Ready to Work Together?
+          </h2>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            I&apos;m always excited to take on new projects and collaborate with creative teams. 
+            Let&apos;s discuss how we can bring your vision to life.
+          </p>
+          <Link 
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Get In Touch
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        </motion.div>
+      </section>
+    </div>
+  );
+}
