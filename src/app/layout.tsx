@@ -21,8 +21,57 @@ const TAG_QUERY = `
 const tagOptions = createCacheOptions(CACHE_DURATIONS.TAGS, [CACHE_TAGS.TAGS, CACHE_TAGS.NAVIGATION]);
 
 export const metadata: Metadata = {
-  title: "Emily-Rose Cripps Design",
-  description: "The online portfolio of Emily-Rose Cripps - a graphic design artist for Film & TV",
+  metadataBase: new URL('https://www.emilyrcripps.com'),
+  title: {
+    default: "Emily-Rose Cripps Design | Dynamic Film, TV & Commercial Designer",
+    template: "%s | Emily-Rose Cripps Design"
+  },
+  description: "Dynamic graphic designer creating cutting-edge visuals for film, television, and commercial productions. Specializing in compelling visual narratives that captivate audiences across entertainment media.",
+  keywords: [
+    "graphic design",
+    "film design",
+    "television design",
+    "commercial design",
+    "TV graphics",
+    "entertainment design",
+    "Emily-Rose Cripps",
+    "visual design",
+    "motion graphics",
+    "film graphics",
+    "production design",
+    "creative design",
+    "dynamic designer",
+    "commercial graphics",
+    "Wiltshire designer",
+    "UK designer"
+  ],
+  authors: [{ name: "Emily-Rose Cripps" }],
+  creator: "Emily-Rose Cripps",
+  publisher: "Emily-Rose Cripps Design",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    url: 'https://www.emilyrcripps.com',
+    siteName: 'Emily-Rose Cripps Design',
+    title: 'Emily-Rose Cripps Design | Dynamic Film, TV & Commercial Designer',
+    description: 'Dynamic graphic designer creating cutting-edge visuals for film, television, and commercial productions. Specializing in compelling visual narratives that captivate audiences.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Emily-Rose Cripps Design | Dynamic Film, TV & Commercial Designer',
+    description: 'Dynamic graphic designer creating cutting-edge visuals for film, television, and commercial productions.',
+  },
   icons: {
     icon: [
       { url: "/assets/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -43,10 +92,18 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/assets/favicon/manifest.json",
+  verification: {
+    google: 'google-verification-code', // Replace with actual Google Search Console verification code
+    // yandex: 'yandex-verification-code',
+    // bing: 'bing-verification-code',
+  },
+  alternates: {
+    canonical: 'https://www.emilyrcripps.com',
+  },
   other: {
-    "msapplication-TileColor": "#ffffff",
+    "msapplication-TileColor": "#5DBFC1",
     "msapplication-TileImage": "/assets/favicon/ms-icon-144x144.png",
-    "theme-color": "#ffffff",
+    "theme-color": "#5DBFC1",
   },
 };
 
@@ -57,9 +114,90 @@ export default async function RootLayout({
 }>) {
   const tags = await client.fetch<SanityDocument[]>(TAG_QUERY, {}, tagOptions);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.emilyrcripps.com/#person",
+        "name": "Emily-Rose Cripps",
+        "url": "https://www.emilyrcripps.com",
+        "jobTitle": "Graphic Designer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Emily-Rose Cripps Design"
+        },
+        "knowsAbout": [
+          "Graphic Design",
+          "Film Design",
+          "Television Graphics",
+          "Commercial Design",
+          "Visual Design",
+          "Motion Graphics"
+        ],
+        "sameAs": [
+          "https://www.instagram.com/emilyrcrippsdesign/",
+          "https://www.imdb.com/name/nm15010073/",
+          "https://www.linkedin.com/in/emily-rose-cripps-0840b8205/",
+          "https://www.etsy.com/uk/shop/EmilyRCrippsDesign"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.emilyrcripps.com/#website",
+        "url": "https://www.emilyrcripps.com",
+        "name": "Emily-Rose Cripps Design",
+        "description": "Dynamic graphic designer creating cutting-edge visuals for film, television, and commercial productions",
+        "publisher": {
+          "@id": "https://www.emilyrcripps.com/#person"
+        },
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.emilyrcripps.com/#organization",
+        "name": "Emily-Rose Cripps Design",
+        "url": "https://www.emilyrcripps.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.emilyrcripps.com/assets/img/emily-rose-logo.svg"
+        },
+        "founder": {
+          "@id": "https://www.emilyrcripps.com/#person"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "availableLanguage": "English"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wiltshire",
+          "addressCountry": "GB"
+        },
+        "areaServed": [
+          "United Kingdom",
+          "Europe",
+          "North America"
+        ],
+        "serviceType": [
+          "Graphic Design",
+          "Film Design",
+          "Television Graphics",
+          "Commercial Design",
+          "Visual Design"
+        ]
+      }
+    ]
+  };
+
   return (
-    <html lang="en" className={`bg-white antialiased font-primary select-none`}>
+    <html lang="en-GB" className={`bg-white antialiased font-primary select-none`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC:wght@400&display=swap" />
         <link rel="stylesheet" href="https://use.typekit.net/ogv2gni.css" />
