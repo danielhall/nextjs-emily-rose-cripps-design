@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { type SanityDocument } from "next-sanity";
 
-import Introduction from "../introduction";
 import GridLayout from "../grid-layout";
 
 // Helper function to convert PortableText to plain text
